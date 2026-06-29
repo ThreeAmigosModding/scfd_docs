@@ -4,6 +4,8 @@
   "private": true,
   "scripts": {
     "build": "next build",
+    "dev": "next dev",
+    "start": "serve out",
     "types:check": "fumadocs-mdx && next typegen && tsc --noEmit",
     "postinstall": "fumadocs-mdx",
     "lint": "biome check",
@@ -18,12 +20,6 @@
     "@fontsource-variable/jetbrains-mono": "^5.2.8",
     "@fontsource-variable/source-code-pro": "^5.2.7",
     "@fuma-translate/react": "^1.0.2",
-    "@opennextjs/aws": "^4.0.3",
-    "@opennextjs/cloudflare": "^1.20.1",
-    "@radix-ui/react-collapsible": "^1.1.14",
-    "@radix-ui/react-popover": "^1.1.17",
-    "@radix-ui/react-presence": "^1.1.6",
-    "@radix-ui/react-scroll-area": "^1.2.12",
     "@tabler/icons-react": "^3.44.0",
     "@takumi-rs/image-response": "^1.8.5",
     "class-variance-authority": "^0.7.1",
@@ -48,7 +44,6 @@
     "@types/react-dom": "^19.2.3",
     "postcss": "^8.5.15",
     "tailwindcss": "^4.3.1",
-    "typescript": "^6.0.3",
-    "wrangler": "^4.105.0"
+    "typescript": "^6.0.3"
   }
 }
