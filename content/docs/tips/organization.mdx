@@ -1,0 +1,122 @@
+---
+title: Organizing Projects
+---
+
+import { File, Folder, Files } from 'fumadocs-ui/components/files';
+
+Keeping your projects organized is very important. Whether it be a resource or the server itself, here are some tips we have on how to keep your stuff clean and organized.
+
+## Organizing Resources
+
+Most beginners will just toss client & server files into a directory with an `fxmanifest.lua` and call it good. This makes expanding resources much harder than it needs to be, especially for those of a large size. This is how we personally structure our resources to ensure clean and maintainable code:
+
+<Callout type="info">
+    We have a resource template available [here](https://github.com/scuffedlabs/scfd_template) if you wish to use the same format we do.
+</Callout>
+
+<Files>
+  <Folder name="my_resource" defaultOpen>
+    <Folder name="client" defaultOpen>
+        <Folder name="modules">
+            <File name="module_one.lua" />
+            <File name="module_two.lua" />
+        </Folder>
+        <File name="main.lua" />
+        <File name="utils.lua" />
+    </Folder>
+    <Folder name="server" defaultOpen>
+        <Folder name="modules">
+            <File name="module_one.lua" />
+            <File name="module_two.lua" />
+        </Folder>
+        <File name="main.lua" />
+        <File name="utils.lua" />
+    </Folder>
+    <Folder name="shared">
+        <File name="main.lua" />
+        <File name="const.lua" />
+        <File name="types.lua" />
+    </Folder>
+    <Folder name="data">
+        <File name="configuration.lua" />
+        <File name="my_data_file.lua" />
+    </Folder>
+    <Folder name="locales">
+        <File name="en.json" />
+        <File name="de.json" />
+    </Folder>
+    <Folder name="web">
+        <File name="index.html" />
+    </Folder>
+    <File name="fxmanifest.lua" />
+  </Folder>
+</Files>
+
+## Organizing Your Server
+
+Just like your resources, your server should also be organized. While FiveM doesn't require any specific folder structure, keeping similar resources grouped together makes your server much easier to navigate and maintain.
+
+For example, if you need to update a vehicle pack, you'll know exactly where to find it. Likewise, if a map is causing issues, you won't have to search through dozens of unrelated resources.
+
+One possible server structure looks like this:
+
+<Files>
+  <Folder name="resources" defaultOpen>
+    <Folder name="[cfx-default]">
+      <File name="spawnmanager" />
+      <File name="mapmanager" />
+      <File name="sessionmanager" />
+    </Folder>
+    <Folder name="[scripts]" defaultOpen>
+      <Folder name="[core]">
+        <File name="my_framework" />
+        <File name="ox_lib" />
+      </Folder>
+      <Folder name="[jobs]">
+        <File name="police" />
+        <File name="ambulance" />
+      </Folder>
+      <Folder name="[standalone]">
+        <File name="my_script" />
+        <File name="another_script" />
+      </Folder>
+    </Folder>
+    <Folder name="[vehicles]" defaultOpen>
+      <Folder name="[leo]">
+        <File name="state_police_pack" />
+        <File name="county_sheriff_pack" />
+      </Folder>
+      <Folder name="[fire]">
+        <File name="fire_department_pack" />
+      </Folder>
+      <Folder name="[civ]">
+        <File name="civilian_vehicles" />
+      </Folder>
+    </Folder>
+    <Folder name="[eup]">
+      <Folder name="[player]">
+        <File name="eup-clothing" />
+      </Folder>
+      <Folder name="[peds]">
+        <File name="custom_peds" />
+      </Folder>
+    </Folder>
+    <Folder name="[maps]">
+      <Folder name="[mlos]">
+        <File name="mrpd" />
+        <File name="hospital" />
+      </Folder>
+      <Folder name="[ymaps]">
+        <File name="traffic_signs" />
+      </Folder>
+    </Folder>
+    <Folder name="[weapons]">
+      <File name="weapon_pack" />
+    </Folder>
+  </Folder>
+</Files>
+
+
+### There is no "correct" way
+
+The exact folder names don't matter. What's important is that you choose a structure that makes sense to you and stay consistent. If every vehicle lives in one place, every map in another, and every script has a logical home, maintaining your server becomes significantly easier as it grows.

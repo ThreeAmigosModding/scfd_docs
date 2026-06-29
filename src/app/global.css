@@ -1,6 +1,9 @@
-@import 'tailwindcss';
-@import 'fumadocs-ui/css/neutral.css';
-@import 'fumadocs-ui/css/preset.css';
+@import "tailwindcss";
+@import "fumadocs-ui/css/shadcn.css";
+@import "fumadocs-ui/css/preset.css";
+@import "@fontsource-variable/inter";
+@import "@fontsource-variable/jetbrains-mono";
+@import "@fontsource-variable/source-code-pro";
 
 html {
   scrollbar-gutter: stable;
@@ -9,4 +12,125 @@ html {
 html > body[data-scroll-locked] {
   margin-right: 0px !important;
   --removed-body-scroll-bar-size: 0px !important;
+}
+
+@theme {
+    --font-sans: "Inter Variable", sans-serif;
+    --font-heading: "JetBrains Mono", monospace;
+    --font-source: "Source Code Pro Variable", monospace;
+}
+
+:root {
+  --font-sans: "Inter Variable", sans-serif;
+  --font-heading: "JetBrains Mono", monospace;
+  --font-source: "Source Code Pro Variable", monospace;
+  --radius: 0rem;
+
+  /* much darker base */
+  --background: oklch(0.085 0.02 285);
+  --foreground: oklch(0.96 0.006 270);
+
+  /* cards clearly elevated from bg */
+  --card: oklch(0.145 0.03 285);
+  --card-foreground: oklch(0.96 0.006 270);
+
+  --popover: oklch(0.155 0.032 285);
+  --popover-foreground: oklch(0.96 0.006 270);
+
+  /* secondary layered surfaces */
+  --secondary: oklch(0.175 0.035 285);
+  --secondary-foreground: oklch(0.96 0.006 270);
+
+  /* muted surfaces */
+  --muted: oklch(0.16 0.02 285);
+  --muted-foreground: oklch(0.72 0.035 265);
+
+  /* clearer borders so cards stand out */
+  --border: oklch(0.32 0.03 285);
+  --input: oklch(0.32 0.03 285);
+
+  /* brand colors preserved */
+  --primary: oklch(0.65 0.24 292);
+  --primary-foreground: oklch(0.98 0.004 270);
+
+  --accent: oklch(0.84 0.14 183);
+  --accent-foreground: oklch(0.085 0.02 285);
+
+  --destructive: oklch(0.67 0.22 30);
+  --destructive-foreground: oklch(0.98 0.004 270);
+
+  --ring: oklch(0.65 0.24 292);
+
+  /* charts */
+  --chart-1: oklch(0.65 0.24 292);
+  --chart-2: oklch(0.84 0.14 183);
+  --chart-3: oklch(0.72 0.18 260);
+  --chart-4: oklch(0.68 0.16 210);
+  --chart-5: oklch(0.78 0.12 300);
+}
+
+.dark {
+  --radius: 0rem;
+
+  /* much darker base */
+  --background: oklch(0.085 0.02 285);
+  --foreground: oklch(0.96 0.006 270);
+
+  /* cards clearly elevated from bg */
+  --card: oklch(0.145 0.03 285);
+  --card-foreground: oklch(0.96 0.006 270);
+
+  --popover: oklch(0.155 0.032 285);
+  --popover-foreground: oklch(0.96 0.006 270);
+
+  /* secondary layered surfaces */
+  --secondary: oklch(0.175 0.035 285);
+  --secondary-foreground: oklch(0.96 0.006 270);
+
+  /* muted surfaces */
+  --muted: oklch(0.16 0.02 285);
+  --muted-foreground: oklch(0.72 0.035 265);
+
+  /* clearer borders so cards stand out */
+  --border: oklch(0.32 0.03 285);
+  --input: oklch(0.32 0.03 285);
+
+  /* brand colors preserved */
+  --primary: oklch(0.65 0.24 292);
+  --primary-foreground: oklch(0.98 0.004 270);
+
+  --accent: oklch(0.84 0.14 183);
+  --accent-foreground: oklch(0.085 0.02 285);
+
+  --destructive: oklch(0.67 0.22 30);
+  --destructive-foreground: oklch(0.98 0.004 270);
+
+  --ring: oklch(0.65 0.24 292);
+
+  /* charts */
+  --chart-1: oklch(0.65 0.24 292);
+  --chart-2: oklch(0.84 0.14 183);
+  --chart-3: oklch(0.72 0.18 260);
+  --chart-4: oklch(0.68 0.16 210);
+  --chart-5: oklch(0.78 0.12 300);
+}
+
+@layer base {
+  body {
+    /*@apply bg-background;*/
+
+    background: var(--background) url(/background.png);
+
+    h1,
+    h2 {
+      font-family: var(--font-heading);
+    }
+
+    a {
+      @apply no-underline;
+    }
+  }
+  html {
+    @apply font-sans;
+  }
 }
