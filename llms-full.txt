@@ -1,0 +1,3963 @@
+# Frequently Asked Questions (/docs/faqs)
+
+
+
+Frequently Asked Questions
+
+
+# Introduction (/docs)
+
+
+
+Welcome to the docs! You can start writing documents in `/content/docs`.
+
+## What is Next? [#what-is-next]
+
+<Cards>
+  <Card title="Learn more about Next.js" href="https://nextjs.org/docs" />
+
+  <Card title="Learn more about Fumadocs" href="https://fumadocs.dev" />
+</Cards>
+
+
+# Free (/docs/free)
+
+
+
+# Paid (/docs/paid)
+
+
+
+# Using Git (/docs/tips/git)
+
+
+
+Git is a very powerful version control tool that should be used whether you're just making a server or developing resources. Popular implementations include `Github`, `GitLab` and `BitBucket` - the most common you'll run into is `Github` as it is the most popular and in my opinion, the best option in most cases.
+
+To learn how to setup Git, you can reference these materials:
+
+* [Github's Guide to setting up Git](https://docs.github.com/en/get-started/git-basics/set-up-git#setting-up-git)
+* [Git's official website](https://git-scm.com/learn)
+* [Codecademy Git Course](https://www.codecademy.com/learn/learn-git)
+
+There's of course dozens of other ways to learn it, you have access to the entire internet at your finger tips, go do some research!
+
+
+# Choosing an IDE/Editor (/docs/tips/ide)
+
+
+
+Before getting started on making a server or writing code, it's best that you choose an IDE/code editor that makes sense for what you are doing. In FiveM, the primary language you'll be interacting with is `lua`. `lua` is very beginner friendly and is easy to work with, that being said it's also supported in dozens of different code editors.
+
+<Callout type="info">
+  We highly discourage the use of Notepad or Notepad++ for editing code, Notepad++ *can* be fine for just editing simple config files but it still lacks the many features that a proper IDE has.
+</Callout>
+
+## Choosing an IDE [#choosing-an-ide]
+
+Here's a list of our recommended IDEs and why:
+
+### Zed [#zed]
+
+[Zed](https://zed.dev) is a super light weight and extremely fast IDE build in [Rust](https://rust-lang.org/). It offers many advantages over alternatives like Visual Studio Code. Zed also has many features built directly into it rather than requiring extensions like Visual Studio Code does.
+
+#### Recommended Extensions [#recommended-extensions]
+
+* Git Firefly by d1y
+  * Provides Git Syntax highlighting directly in-line
+* SQL by nervenes, notpeter, phileix and tammyxiong
+  * SQL language support, this is useful if you are working with SQL files.
+* Lua by Max Brunsfeld
+  * Provides syntax highlighting for the Lua language and adds the Lua Language Server (LLS) to Zed.
+* XML by sweetppro
+  * Provides syntax support for XML/Meta files. This is useful if you are working with those files.
+* Color Highlight by Jason Lee
+  * Shows colors directly in the editor, like HEX or RGB.
+* HTML by Issac Clayton
+  * Provides support for HTML, useful if you are working with NUI.
+
+#### Recommended Settings [#recommended-settings]
+
+* Git Blame
+  ```json
+  "git": {
+      "inline_blame": {
+          "enabled": true,
+      },
+  },
+  ```
+
+* Diagnostics (Like ErrorLens)
+  ```json
+  "diagnostics": {
+      "inline": {
+          "enabled": true,
+          "max_severity": null, // same values as the `diagnostics_max_severity` from the editor settings
+      }
+  },
+  ```
+
+* Lua Language Server Settings
+  <Callout type="info">
+    We Highly recommend using per-project configs via `.luarc.json` files. You can read how to setup the [fivem-lls-addon here](https://github.com/overextended/fivem-lls-addon)
+  </Callout>
+  ```json
+  "lsp": {
+      "lua-language-server": {
+      "settings": {
+          "Lua": {
+          "runtime": {
+              "version": "Lua54",
+              "nonstandardSymbol": [
+              "/**/",
+              "`",
+              "+=",
+              "-=",
+              "*=",
+              "/=",
+              "<<=",
+              ">>=",
+              "&=",
+              "|=",
+              "^="
+              ],
+              "special": {
+              "lib.load": "require"
+              },
+              "pathStrict": true,
+              "plugin": "path/to/fivem-lls-addon/plugin.lua" // https://github.com/overextended/fivem-lls-addon
+          },
+          "diagnostics": {
+              "disable": [
+              "lowercase-global",
+              "undefined-field",
+              "undefined-global",
+              "missing-parameter",
+              "param-type-mismatch",
+              "err-nonstandard-symbol",
+              "unknown-symbol",
+              "exp-in-action",
+              "malformed-number",
+              "no-visible-label",
+              "miss-end",
+              "duplicate-doc-field"
+              ],
+              "severity": {
+              "duplicate-set-field": "Hint",
+              },
+          },
+          "workspace": {
+              "checkThirdParty": false,
+              "ignoreDir": [
+              ".vscode",
+              ".github",
+              ".git",
+              "**/node_modules",
+              "node_modules",
+              "\\[cfx\\]",
+              "\\[cfx-default\\]",
+              ],
+              "library": [
+              "path/to/fivem-lls-addon/library", // FiveM LLS addon - https://github.com/overextended/fivem-lls-addon
+              "path/to/fivem-lls-addon/library/runtime", // FiveM LLS addon - https://github.com/overextended/fivem-lls-addon
+              "path/to/fivem-lls-addon/library/natives/CFX-NATIVE", // FiveM LLS addon - https://github.com/overextended/fivem-lls-addon
+              "path/to/fivem-lls-addon/library/natives/GTAV", // FiveM LLS addon - https://github.com/overextended/fivem-lls-addon
+              "path/to/ox_types/types", // ox_types, useful for working with Overextended resources - https://github.com/overextended/ox_types
+              "path/to/ox_lib", // ox_lib type/formating support - https://github.com/overextended/ox_lib
+              ],
+          },
+          },
+      },
+      },
+  }
+  ```
+
+### Visual Studio Code [#visual-studio-code]
+
+Visual Studio Code is the most popular IDE, however its much slower than Zed, takes up more resources and requires more extensions to have a proper developer experience. I'd highly recommend switching to and/or using Zed instead.
+
+#### Recommended Extensions [#recommended-extensions-1]
+
+* Lua Language Server by sumneko
+  * Adds proper lua syntax highlighting and support for the Lua Language Server (LLS)
+* Error Lens by Alexander
+  * In-line hightlighting of error, warning and other language diagnostics
+* TODO Highlight by Wayou Liu
+  * Highlight TODOs, FIXMEs, and any keywords, annotations...
+
+
+# Tips & Tricks (/docs/tips)
+
+
+
+
+
+<Cards>
+  {getPageTreePeers(source.getPageTree(), "/docs/tips").map((peer) => (
+      <Card key={peer.url} title={peer.name} href={peer.url}>
+        {peer.description}
+      </Card>
+    ))}
+</Cards>
+
+***
+
+# The Best Tip [#the-best-tip]
+
+The best tip we can possibly provide you is **do not make asking for help your first step, instead make it your last**.
+
+Before reaching out for support, take the time to:
+
+* Read the documentation thouroughly to be sure you didn't miss something.
+* Double or even triple check the installation instructions.
+* Look through frequently asked questions
+* Read the actual error you're getting, it might be overwhelming but error messages are usually there to help you and tell you whats happening.
+* Search google, youtube, github, community forums etc to see if someone has had the same issue as you.
+
+More often than not, the answer to your problem is already available. Spending a few minutes researching your problem can save both you and others a lot of time.
+
+More importantly, try and understand *why* something works instead of only learning *how* to make something work. Every bug, error message, and unexpected behavior is an oppourtunity to learn.
+
+Ask yourself questions like:
+
+* Why is this variable `nil`?
+* Why is this function returning an error?
+* Where is this event being triggered?
+* What data is this function expecting?
+* What changed that caused this to stop working?
+
+Developers improve by being curious, the more you investigate problems yourself the easier it becomes to solve future issues without needing to ask for help. That being said, there is nothing wrong with asking for help when you need it.
+
+Give yourself 15-30 minutes to genuinely investigate a problem before asking for help. If you're still stuck after that, ask away - but be sure to explain what you've already tried. It shows others that you've put in the effort, and makes it much easier for them to help you.
+
+A question that includes "Here's exactly what I expected to happen vs what is actually happening, and here's what i've tried so far..." is much more likely to get a useful answer than "x doesn't work".
+
+Finally, Google and YouTube are your friends, learning how to search effectively is one of the most valuable skills any developer can have. No developer knows every function available in whatever language/system they're working with, developers reference existing content and ask questions constantly - it's part of being a developer.
+
+
+# Organizing Projects (/docs/tips/organization)
+
+
+
+
+
+Keeping your projects organized is very important. Whether it be a resource or the server itself, here are some tips we have on how to keep your stuff clean and organized.
+
+## Organizing Resources [#organizing-resources]
+
+Most beginners will just toss client & server files into a directory with an `fxmanifest.lua` and call it good. This makes expanding resources much harder than it needs to be, especially for those of a large size. This is how we personally structure our resources to ensure clean and maintainable code:
+
+<Callout type="info">
+  We have a resource template available [here](https://github.com/scuffedlabs/scfd_template) if you wish to use the same format we do.
+</Callout>
+
+<Files>
+  <Folder name="my_resource">
+    <Folder name="client">
+      <Folder name="modules">
+        <File name="module_one.lua" />
+
+        <File name="module_two.lua" />
+      </Folder>
+
+      <File name="main.lua" />
+
+      <File name="utils.lua" />
+    </Folder>
+
+    <Folder name="server">
+      <Folder name="modules">
+        <File name="module_one.lua" />
+
+        <File name="module_two.lua" />
+      </Folder>
+
+      <File name="main.lua" />
+
+      <File name="utils.lua" />
+    </Folder>
+
+    <Folder name="shared">
+      <File name="main.lua" />
+
+      <File name="const.lua" />
+
+      <File name="types.lua" />
+    </Folder>
+
+    <Folder name="data">
+      <File name="configuration.lua" />
+
+      <File name="my_data_file.lua" />
+    </Folder>
+
+    <Folder name="locales">
+      <File name="en.json" />
+
+      <File name="de.json" />
+    </Folder>
+
+    <Folder name="web">
+      <File name="index.html" />
+    </Folder>
+
+    <File name="fxmanifest.lua" />
+  </Folder>
+</Files>
+
+## Organizing Your Server [#organizing-your-server]
+
+Just like your resources, your server should also be organized. While FiveM doesn't require any specific folder structure, keeping similar resources grouped together makes your server much easier to navigate and maintain.
+
+For example, if you need to update a vehicle pack, you'll know exactly where to find it. Likewise, if a map is causing issues, you won't have to search through dozens of unrelated resources.
+
+One possible server structure looks like this:
+
+<Files>
+  <Folder name="resources">
+    <Folder name="[cfx-default]">
+      <File name="spawnmanager" />
+
+      <File name="mapmanager" />
+
+      <File name="sessionmanager" />
+    </Folder>
+
+    <Folder name="[scripts]">
+      <Folder name="[core]">
+        <File name="my_framework" />
+
+        <File name="ox_lib" />
+      </Folder>
+
+      <Folder name="[jobs]">
+        <File name="police" />
+
+        <File name="ambulance" />
+      </Folder>
+
+      <Folder name="[standalone]">
+        <File name="my_script" />
+
+        <File name="another_script" />
+      </Folder>
+    </Folder>
+
+    <Folder name="[vehicles]">
+      <Folder name="[leo]">
+        <File name="state_police_pack" />
+
+        <File name="county_sheriff_pack" />
+      </Folder>
+
+      <Folder name="[fire]">
+        <File name="fire_department_pack" />
+      </Folder>
+
+      <Folder name="[civ]">
+        <File name="civilian_vehicles" />
+      </Folder>
+    </Folder>
+
+    <Folder name="[eup]">
+      <Folder name="[player]">
+        <File name="eup-clothing" />
+      </Folder>
+
+      <Folder name="[peds]">
+        <File name="custom_peds" />
+      </Folder>
+    </Folder>
+
+    <Folder name="[maps]">
+      <Folder name="[mlos]">
+        <File name="mrpd" />
+
+        <File name="hospital" />
+      </Folder>
+
+      <Folder name="[ymaps]">
+        <File name="traffic_signs" />
+      </Folder>
+    </Folder>
+
+    <Folder name="[weapons]">
+      <File name="weapon_pack" />
+    </Folder>
+  </Folder>
+</Files>
+
+### There is no "correct" way [#there-is-no-correct-way]
+
+The exact folder names don't matter. What's important is that you choose a structure that makes sense to you and stay consistent. If every vehicle lives in one place, every map in another, and every script has a logical home, maintaining your server becomes significantly easier as it grows.
+
+
+# Writing Maintainable Code (/docs/tips/writing-code)
+
+
+
+Writing code that *works* is only half the battle. Writing code that's easy to read, understand and modify months later is what separates a good developer from a great one. As your project grows, you'll find yourself spending far more time reading and maintaining existing code than writing new code. These practices make that experience much more enjoyable, for both yourself and anybody else that works on your project.
+
+## Use Meaningful Names [#use-meaningful-names]
+
+Variable and function names should be easily descriptive for what purpose they serve, not saving a few keystrokes.
+
+* Bad
+
+```lua
+    local p = PlayerPedId()
+    local c = GetEntityCoords(p)
+```
+
+* Good
+
+```lua
+    local playerPed = PlayerPedId()
+    local playerPos = GetEntityCoords(playerPed)
+```
+
+Someone reading your code shouldn't have to guess what `p` or `c` actually means.
+
+## Keep Functions Small [#keep-functions-small]
+
+A function generally should do one thing. Instead of creating one large function that handles multiple responsibilities like `SpawnVehicle()`, break it up into smaller functions like `LoadModel()`, `CreateVehicle()`, `SetupVehicle()`, `GetVehicleKeys()`. Smaller functions are easier to read, test, debug and can be reused instead of rewriting the same code a dozen times.
+
+## Avoid Deep Nesting [#avoid-deep-nesting]
+
+Code that is nested several levels deep quickly becomes difficult to follow.
+
+* Bad
+
+```lua
+local function doThing()
+    if player then
+        if player.job then
+            if player.job.name == "police" then
+                -- do thing
+            end
+        end
+    end
+end
+```
+
+* Good
+
+```lua
+local function doThing()
+    if not player then return end
+    if not player.job then return end
+    if player.job.name ~= "police" then return end
+
+    -- Do thing
+end
+```
+
+Using early returns reduces indentation and makes your intent much clearer.
+
+## Don't Repeat Yourself (DRY) [#dont-repeat-yourself-dry]
+
+If you find yourself copying and pasting code, ask yourself if it should be a function instead.
+
+* Bad
+
+```lua
+-- In function one:
+SetEntityHeading(vehicle, heading)
+SetVehicleOnGroundProperly(vehicle)
+
+-- In another function:
+SetEntityHeading(vehicle, heading)
+SetVehicleOnGroundProperly(vehicle)
+
+-- In another function
+SetEntityHeading(vehicle, heading)
+SetVehicleOnGroundProperly(vehicle)
+```
+
+* Good
+
+```lua
+-- Make a re-usable function that you can reference in other functions.
+local function setupVehicle(vehicle, heading)
+    SetEntityHeading(vehicle, heading)
+    SetVehicleOnGroundProperly(vehicle)
+end
+```
+
+If you need to change the logic later, you only need to change it in one place.
+
+## Keep Globals to a Minimum [#keep-globals-to-a-minimum]
+
+Keep the global scope as clean as possible, when you can always localize functions and variables.
+
+* Bad
+
+```lua
+MovingObject = false -- Variable only referenced in this one file
+```
+
+* Good
+
+```lua
+local movingObject = false -- Variable only referenced in this one file, defined locally.
+```
+
+## Comment the "Why", not the "What" [#comment-the-why-not-the-what]
+
+Good comments will explain *why* something is happening, not *what* is happening. People reading your code should be able to understand *what* is happening just by reading it.
+
+* Bad
+
+```lua
+-- Sets the player's health to 200
+SetEntityHealth(playerPed, 200)
+```
+
+* Good
+
+```lua
+-- Give the player temporary health while their character loads.
+SetEntityHealth(playerPed, 200)
+```
+
+If the code clearly explains *what* it's doing, there's no need to repeat it. Additionally, you shouldn't just spam comments throughout your entire codebase, if it isn't obvious why something is done in a way that's when we'd recommend adding a comment to explain why.
+
+## Be Consistent [#be-consistent]
+
+Consistency is more important than personal preference. Choose a naming style and stick with it, for example:
+
+* `playerPed`
+* `playerCoords`
+* `vehicleEntity`
+* `spawnPosition`
+
+Don't mix multiple naming conventions throughout the same project. Consistency also applies to formatting. Whether you use tabs or spaces, `snake_case` or `camelCase`, choose one style and stick with it throughout your project. Consistent formatting makes code much easier to read.
+
+## Remove Dead Code [#remove-dead-code]
+
+Commented-out code quickly becomes clutter. If you're no longer using it, delete it. That's one of the reasons why we utilize version control like `Git`, you can always recover the old code if you need it. If you aren't using the code anymore, delete it.
+
+## Don't Optimize Too Early [#dont-optimize-too-early]
+
+While this sounds counter productive, focus on writing readable and functioning code before micro optimizations. Write code that works, profile it, and *then* optimize the parts that actually need it.
+
+Premature optimization often makes code more difficult to understand without providing any meaningful performance improvements.
+
+## Leave the Code Better Than You Found It [#leave-the-code-better-than-you-found-it]
+
+Whenever you're working in a file, look for small improvements you can make. Maybe that's renaming a confusing variable, removing unused code, improving a comment or something else. Small improvements add up over time and make your project much easier to maintain.
+
+## Final Thoughts [#final-thoughts]
+
+Maintainable code isn't about writing clever code, it's about writing code that's easy for someone else to understand. That "someone else" usually ends up being you, six months from now.
+
+Future you will thank present you for writing clean, organized and readable code. Here's some more resources for you to reference:
+
+* [Effective FiveM Lua](https://manason.github.io/effective-fivem-lua/)
+* [Lua's Beginners Guide](https://github.com/pohka/Lua-Beginners-Guide)
+* [Packt Lua QuickStart Guide](https://github.com/PacktPublishing/Lua-Quick-Start-Guide)
+* [Lua Manual](https://www.lua.org/manual/)
+
+Code is read far more often than it's written. Optimize for readability first.
+
+
+# Simple Bug Reports (/docs/free/bug-reports)
+
+
+
+# Simple Changelog System (/docs/free/changelog)
+
+
+
+# Simple Chat Toolbox (/docs/free/chat)
+
+
+
+# Simple Tackle System (/docs/free/tackle)
+
+
+
+# Better Radio Anims (/docs/free/radio-animations)
+
+
+
+# Airdrops (/docs/paid/airdrops)
+
+
+
+# Card Rooms (/docs/paid/card-rooms)
+
+
+
+# Simple Elevator System (/docs/paid/elevators)
+
+
+
+# Fire Danger Signs (/docs/paid/fire-signs)
+
+
+
+# Advanced Fuel System (/docs/paid/fuel)
+
+
+
+# Configuration (/docs/paid/garbage-job/configuration)
+
+
+
+
+
+## Configuration & Data files [#configuration--data-files]
+
+All of the configuration & data files have detailed comments explaining how to configure everything to your liking, if you need assistance please reach out to us via Discord.
+
+The main config file is located at `data/configuration.lua` and handles the general configuration data.
+
+The locations data file is located at `data/locations.lua` and handles all of the location-specific information like ped locations, return points, etc
+
+The outfits data file is located at `data/outfits.lua` and handles all of the outfit information.
+
+The props data file is located at `data/props.lua` and handles all of the prop information for dumpsters, bins & bags. This is also where you can adjust the amounts you get per trash type.
+
+The zone names data file is located at `data/zone_names.lua` and is just a list of zone names, you most likely wont need to edit this.
+
+The zones data file is located at `data/zones.lua` and includes over a dozen preconfigured zones around the map.
+
+<Tabs items="[&#x22;configuration.lua&#x22;, &#x22;locations.lua&#x22;, &#x22;outfits.lua&#x22;, &#x22;props.lua&#x22;, &#x22;zone_names.lua&#x22;, &#x22;zones.lua&#x22;]">
+  <Tab value="configuration.lua">
+    ```lua
+        -- Enable debug mode for setup & testing. Enables various debug commands & prints.
+        config.debug = true -- boolean. Default: false
+        
+        -- Enable or disable the version checker, recommended to leave this enabled to be notified of when there is an update available.
+        config.enableVersionCheck = true -- boolean. Default: true
+        
+        -- Framework
+        -- "auto" | "qb" | "qbx" | "esx" | "nd" | "standalone" | "custom"
+        config.framework = "auto"
+        
+        -- Inventory
+        -- "auto" | "ox" | "none" | "custom"
+        config.inventory = "auto" -- string.
+        
+        -- Interaction / Target
+        -- "auto" | "ox" | "sleepless" | "none" | "custom"
+        config.interaction = "auto" -- string.
+        
+        -- Text UI System
+        -- "auto" | "ox" | "lation" | "custom"
+        config.textui = "auto" -- string.
+        
+        -- Notification system
+        -- "auto" | "ox" | "lation" | "wasabi" | "custom"
+        config.notification = "auto" -- string
+        
+        -- Progressbar system
+        -- "auto" | "ox" | "lation" | "custom"
+        config.progressbar = "auto"
+        
+        -- Context Menu system
+        -- "auto" | "ox" | "lation" | "custom"
+        config.contextMenu = "auto"
+        
+        -- Vehicle key systems
+        -- "auto" | "qb" | "qbx" | "wasabi" | "cd" | "renewed" | "custom" | "none"
+        config.vehicleKeys = "auto"
+        
+        -- Fuel systems
+        -- "auto" | "scfd" | "ox" | "cdn" | "legacy" | "renewed" | "custom" | "none"
+        config.fuelSystem = "auto"
+        
+        -- The job name
+        config.job = "garbage" -- string. Default: "garbage"
+        
+        -- Require players to have the job to perform any tasks.
+        config.requireJob = true -- boolean. Default: true
+        
+        -- Require players to have the job to pickup the bags, bins and dumpsters. Only players with the job that are on-duty will be able to fill the trucks regardless of this setting.
+        config.requireJobForInteraction = false -- boolean. Default: true
+        
+        -- Require players to be clocked in to pickup the bags, bins & dumpsters. Only players with the job that are on-duty will be able to fill the trucks regardless of this setting.
+        config.requireClockInForInteraction = false -- boolean. Default: true
+        
+        -- Should players be required to empty the truck before returning it?
+        -- The empty locations are configurable in data/locations.lua
+        config.requireEmpty = true -- boolean. Default: true
+        
+        -- Should players need to manually return the vehicles or should they automatically be deleted when the player clocks out.
+        config.manualReturn = true -- boolean. Default: true
+        
+        -- Should a waypoint be made to the zone location?
+        -- if Config.userSettings is enabled, users will be able to change this on their side via /garbagesettings
+        config.drawRoutes = true -- boolean. Default: true
+        
+        -- Enable trash indicator hud
+        -- if Config.userSettings is enabled, users will be able to change this on their side via /garbagesettings
+        config.enableHud = true -- boolean. Default: true
+        
+        -- Default hud position of the indicator hud while inside a garbage truck.
+        -- if Config.userSettings is enabled, users will be able to change this on their side via /garbagesettings
+        -- "bottom-right" | "bottom-center" | "bottom-left" | "center-left" | "center-right" | "top-right" | "top-center" | "top-left"
+        config.hudPosition = "bottom-right" -- string. Default: "bottom-right"
+        
+        -- Default style of the indicator hud while inside a garbage truck.
+        -- if Config.userSettings is enabled, users will be able to change this on their side via /garbagesettings
+        -- "horizontal" | "vertical"
+        config.hudStyle = "vertical" -- string. Default: "vertical"
+        
+        -- Enable the user settings menu
+        -- Default command is /garbagesettings, you can change this in the locales directory.
+        config.userSettings = true -- boolean. Default: true
+        
+        -- Reset the user settings menu back to default when players load in.
+        -- This should only be used if you have changed one of the values and want to update it across all users.
+        config.resetUserSettings = false -- boolean. Default: false
+        
+        -- Enable the random item drops when players are putting the trash into the truck.
+        -- You can define the items and their chances per zone in data/zones.lua
+        config.itemRewards = true -- boolean. Default: true.
+        
+        -- The chance percentage to give a random item drop
+        -- range from 0-100
+        config.itemDropPercentage = 25 -- integer. Default: 25
+        
+        -- Should players be able to return the trucks from the ped or have to drive them to the point to return them.
+        config.returnTrucksAtPed = false -- boolean. Default: false
+        
+        -- Should players be teleported into the truck when it spawns?
+        config.teleportIntoVehicle = false -- boolean. Default: false
+        
+        -- Should vehicles be spawned using CreateVehicleServerSetter.
+        -- If you don't know what this means, I recommend you leave it alone.
+        -- If you do know what it means, I recommend enabling it, however it may cause instability on higher population servers.
+        -- If you do enable this, PLEASE disable config.teleportIntoVehicle as it is highly likely to cause issues.
+        config.spawnVehicleWithServerSetter = false -- boolean. Default: false
+        
+        -- The chance of the route being completed after reach completed zone after minZone is met.
+        -- This is a percentage range from 0-100. Ie 25 = 25%
+        config.zoneChance = 25 -- integer. Default: 25
+        
+        -- The time it takes to load the dumpster into the truck (Progress bar)
+        -- In milliseconds.
+        config.dumpsterUnloadTime = 2500 -- integer. Default: 2500
+        
+        -- The time it takes to unload the truck. (Progress bar)
+        -- In milliseconds
+        config.truckUnloadTime = 8000 -- integer. Default: 8000
+        
+        -- Deposit Configuration
+        config.deposit = {
+            -- Enables the deposit / payments for the trucks.
+            enabled = true, -- boolean. Default: true
+        
+            -- Should the deposits be refunded when the truck is returned?
+            shouldRefund = true, -- boolean. Default: true
+        
+            -- Should the amount refunded to the player when they return the truck will be calculated based on the damage the truck has.
+            deductDamage = true, -- boolean. Default: true
+        
+            -- Should the driver will be notified when the damage threshold is met.
+            notify = true, -- boolean. Default: true
+        
+            -- The amount of damage that has to be done to the truck to deduct any money from the deposit.
+            deductDamageThreshold = 100, -- integer. Default: 100
+        
+            -- The amount of money to subtract per additional 100 points of damage after the threshold is met.
+            deductionAmount = 100, -- integer. Default: 100
+        }
+        
+        -- Payment configuration.
+        config.payment = {
+            -- The payment type to use.
+            -- ie 'cash' or 'bank'
+            type = 'bank', -- string. Default: 'bank'
+        
+            -- Multiply the payout by the amount of players there are in the group.
+            payoutMultiplier = true, -- boolean. Default: true
+        
+            -- Split the payout evenly between all players, else give each player the total amount (or multiplied amount if enabled.)
+            payoutSplit = true, -- boolean. Default: true
+        
+            -- should we payout when the truck is returned or should the player have to collect it from the ped afterwards.
+            automaticPayout = true, -- boolean. Default: true
+        
+            -- the minimum requirement to return to the trash depot and collect payment.
+            -- If this threshold isn't met, a prompt will appear asking the player if they wish to continue to return the truck as they will not be paid.
+            minTrashAmount = 1000, -- integer. Default: 1000
+        
+            -- The amount of money per trash amount that you will receive.
+            -- ie: if I collect 2000 trash, my payslip would be $10,000
+            paymentPerTrash = 5 -- integer. Default: 5
+        }
+        
+        -- Boss menu configuration
+        config.bossMenu = {
+            -- Enable the boss menu
+            -- INFO: By default, only qb & qbx have boss menus, you will need to integrate your own if you are using a different framework.
+            enabled = true, -- boolean. Default: true
+        
+            -- Boss menu locations
+            locations = {
+                vec3(-350.12, -1569.78, 25.22),
+            }
+        }
+        
+        -- Interaction configuration.
+        -- Ie moving dumpsters, bags, etc
+        config.interactions = {
+            -- Should the textUI be shown to stop moving/carrying the object
+            showTextUI = true, -- boolean. Default: true
+        
+            -- The default key to stop moving/carrying the object.
+            -- Users can change this on their side in the keybinds.
+            defaultKey = "X", -- string. Default: "X"
+        
+            -- The target icons
+            targetIcon = "fas fa-trash", -- string. Default: "fas fa-trash"
+        
+            -- The target distance
+            targetDistance = 2, -- integer. Default: 2
+        
+            -- Array of controls to be disabled when moving/carrying the dumpsters.
+            -- https://docs.fivem.net/docs/game-references/controls/
+            -- Additionally, you can add more stuff to be disable (ie phone) to the `blockActions` function in bridge/hooks/client.lua
+            disableDumpsterControls = { 21, 22, 23, 24, 25, 36, 44, 45, 263, 264, 73, 257 }, -- array. Default: { 21, 22, 23, 24, 25, 36, 44, 45, 263, 264, 73, 257 }
+        
+            -- Array of controls to be disabled when moving/carrying the bins.
+            -- https://docs.fivem.net/docs/game-references/controls/
+            -- Additionally, you can add more stuff to be disable (ie phone) to the `blockActions` function in bridge/hooks/client.lua
+            disableBinControls = { 21, 22, 23, 24, 25, 36, 44, 45, 263, 264, 73, 257 }, -- array. Default: { 21, 22, 23, 24, 25, 36, 44, 45, 263, 264, 73, 257 }
+        
+            -- Array of controls to be disabled when moving/carrying the bags.
+            -- https://docs.fivem.net/docs/game-references/controls/
+            -- Additionally, you can add more stuff to be disable (ie phone) to the `blockActions` function in bridge/hooks/client.lua
+            disableBagControls = { 23, 24, 25, 36, 44, 45, 263, 264, 73, 257 } -- array.  Default: { 23, 24, 25, 36, 44, 45, 263, 264, 73, 257 }
+        }
+        
+        -- Group system configuration
+        config.groupSystem = {
+            -- Enable the group system, this will allow players to create groups and invite other players to them.
+            enabled = true, -- boolean. Default: true
+        
+            -- The minimum grade that is required to create a group
+            requiredGrade = 3, -- integer. Default: 3
+        
+            -- The maximum amount of players in a group.
+            -- Highly recommended to not have this more than 4.
+            maxAmount = 3 -- integer. Default: 3
+        }
+        
+        -- Locker room config
+        config.lockerRooms = {
+            -- Enable the locker rooms & clothing functionality
+            enabled = true, -- boolean. Default: true
+        
+            -- Blip configuration for the locker room.
+            -- For colors & sprites see https://docs.fivem.net/docs/game-references/blips/
+            blip = {
+                -- Blip sprite
+                sprite = 73, -- integer. Default: 318
+        
+                -- Blip color
+                color = 2, -- integer. Default: 2
+        
+                -- Blip scale
+                scale = 0.8, -- integer. Default: 0.8
+            },
+        
+            -- Automatically sets the outfit when the player clocks on and resets it when they clock off.
+            autoSetOutfit = false, -- boolean. Default: false
+        
+            -- Should the locker room & clock-in / group interactions be separated? This is useful if you are using an MLO with a locker room.
+            separateLockers = false, -- boolean. Default: true
+        
+            -- This is used for autoSetOutfit and these are the outfits that will be set when the player clocks on.
+            -- You can setup the outfits in data/outfits.lua
+            defaultOutfits = {
+                -- Default male outfit, this is the label from data/outfits.lua
+                male = "Employee Uniform",  -- string. Default: "Employee Uniform"
+                -- Default female outfit, this is the label from data/outfits.lua
+                female = "Employee Uniform" -- string. Default: "Employee Uniform"
+            },
+        }
+        
+        
+        -- truck return & unload blip configuration options.
+        -- For colors & sprites see https://docs.fivem.net/docs/game-references/blips/
+        config.blips = {
+            returnPoints = {
+                -- Blip sprite
+                sprite = 318, -- integer. Default: 318
+        
+                -- Blip color
+                color = 1, -- integer. Default: 2
+        
+                -- Blip scale
+                scale = 0.8, -- integer. Default: 0.8
+            },
+        
+            unloadPoints = {
+                -- Blip sprite
+                sprite = 318, -- integer. Default: 318
+        
+                -- Blip color
+                color = 2, -- integer. Default: 2
+        
+                -- Blip scale
+                scale = 0.8, -- integer. Default: 0.8
+            }
+        }
+        
+        -- Trucks configuration
+        ---@type GarbageTruckConfigData[]
+        config.trucks = {
+            {
+                -- Vehicle model to use for this garbage truck.
+                -- IMPORTANT: MUST use backticks for the vehicle hash, e.g. `trash2`
+                model = `trash2`,
+        
+                -- The display name of the truck used in menus and UI.
+                label = "Jobuilt Trashmaster", -- string
+        
+                -- The description shown when selecting this truck.
+                -- Optional
+                description =
+                "When style meets sanitation. The Jobuilt Trashmaster is the unsung hero of the streets - a rolling fortress of filth and forgotten dreams. Built to haul the city's nastiest secrets and crush anything dumb enough to get in its way, this beast proves that one man's trash is another man's heavy-duty masterpiece. Slow? Sure. Indestructible? Absolutely.", -- string
+        
+                -- URL to an image used to visually represent the truck in menus.
+                -- This must be a direct image url (ends in .png/.jpg, etc)
+                -- Optional
+                image = "https://static.wikia.nocookie.net/gtawiki/images/2/2d/Trashmaster-GTAO-RGSC-Action.jpg", -- string
+        
+                -- Required job grade to spawn this truck.
+                -- Set to 0 to allow all employees to use it.
+                grade = 0, -- integer
+        
+                -- How much total trash this truck can hold.
+                -- Each trash item adds weight. When this limit is reached,
+                -- players won't be able to load more trash.
+                capacity = 3000, -- integer
+        
+                -- How much money it costs to take this truck out.
+                -- This is refunded when the truck is properly returned, if enabled.
+                cost = 500, -- integer
+        
+                -- The pickup offset used when aligning dumpsters to the truck.
+                -- Only change if your dumpster model isn't lining up correctly.
+                offset = -5.57, -- integer
+        
+                -- Whether or not this truck uses forks to lift the dumpsters.
+                -- currently only master2 supports this.
+                front = false, -- boolean
+        
+                -- Which types of trash this vehicle can pick up.
+                allowed = {
+                    -- Can pick up trash bags
+                    bags = true, -- boolean
+        
+                    -- Can pick up wheelie bins
+                    bins = true, -- boolean
+        
+                    -- Can pick up whole dumpsters
+                    dumpsters = true -- boolean
+                },
+        
+                -- The map blip settings displayed when a player is using this truck.
+                -- For colors & sprites see https://docs.fivem.net/docs/game-references/blips/
+                blip = {
+                    -- Blip sprite
+                    sprite = 318, -- integer. Default: 318
+        
+                    -- Blip color
+                    color = 2, -- integer. Default: 2
+        
+                    -- Blip scale
+                    scale = 0.8, -- integer. Default: 0.8
+        
+                    -- Optional label override, by default uses the truck name.
+                    -- label = "Garbage Truck", -- string. Default: "Garbage Truck"
+                },
+        
+                -- Vehicle properties applied to the truck when it is spawned.
+                -- You can use /getvehicleprops-garbage when in the truck to copy the table to your clipboard.
+                -- This uses ox_lib's lib.getVehicleProperties() output structure:
+                -- https://coxdocs.dev/ox_lib/Modules/VehicleProperties/Client#libgetvehicleproperties
+                props = {}
+            },
+        }
+    ```
+  </Tab>
+
+  <Tab value="locations.lua">
+    ```lua
+    --[[
+        This file defines all garbage job clock-in locations and their configuration options.
+
+        Each entry in this file represents a different work site where players can:
+            - Clock in / clock out
+            - Spawn truck points
+            - Return truck points
+            - Unload truck points
+            - Access locker rooms (optional)
+            - Receive job routes based on nearby zones
+
+        You may freely add, remove, or edit locations to fit your server’s layout, custom MLOs,
+        or gameplay design. Each location behaves independently and can have its own truck spawns,
+        return areas, zones, and blip settings.
+
+        ---------------------------------------------------------
+        OPTION EXPLANATIONS
+        ---------------------------------------------------------
+
+        - coords
+            The position (vec4) where the job ped will spawn.
+            The ped is the main interaction point for starting & ending the job.
+
+        - distance
+            How far away the player must be before the ped is unloaded/loaded.
+            Higher values = ped visible from farther away (slightly more performance cost).
+
+        - minZones / maxZones
+            Defines how many garbage zones the player must complete for this location.
+            Each location can have different route lengths.
+
+            Example:
+                minZones = 4     → minimum of 4 stops
+                maxZones = 8     → maximum of 8 stops
+
+        - ped
+            Configuration for the clock-in NPC.
+                model      = Ped model hash (use backticks: `s_m_y_garbage`)
+                scenario   = World scenario animation (NPC idle behavior)
+                anim       = Optional custom animation (dict + clip)
+
+            Use either "scenario" OR "anim".
+
+        - vehicleSpawns
+            A list of vec4 positions.
+            When a player spawns a truck, the script checks each spot in order and uses the
+            first empty one. Add as many as you like.
+
+        - vehicleReturns
+            Locations where players may return their truck (if manual returns are enabled).
+            A simple vec3 is used since heading is not needed.
+
+        - vehicleUnloads
+            Locations where the truck unload animation & processing takes place.
+            Add more to support multiple unloading stations.
+
+        - lockers
+            Optional locker room coordinates.
+            Only used when `separateLockers = true` in the locker rooms section of the main config file.
+            Allows you to place locker rooms away from clock-in peds (useful for MLOs).
+
+        - blip
+            Controls the map blip for the job location.
+                enabled = true/false
+                sprite  = Blip icon ID
+                color   = Blip color ID
+                scale   = Blip size
+                label   = Name shown on the map
+
+        - zones
+            A list of valid GTA zone codes assigned to this location.
+            These define where players will be sent to pick up garbage.
+            Zones must match those listed in the Zones data file.
+
+            Example:
+                "DAVIS", "STRAW", "MORN", etc.
+
+            You can restrict city locations to only city zones,
+            and rural locations to rural zones.
+
+        ---------------------------------------------------------
+        ADDING NEW LOCATIONS
+        ---------------------------------------------------------
+
+        Simply copy an existing block, paste it underneath, and update:
+
+            - coords
+            - ped location
+            - vehicle spawns / returns / unloads
+            - zones list
+            - blip label
+
+        This allows unlimited job sites around the map (LS city, county, custom MLOs, etc.).
+
+        ---------------------------------------------------------
+        NOTES
+        ---------------------------------------------------------
+
+        - All vec3/vec4 positions can be collected using your favorite coord-grabber resource.
+        - You can safely delete any location you do not want to use.
+        - Each location can have different difficulty and zone ranges.
+        - Blips are optional and can be disabled per-location.
+        - Make sure zone names match exactly the ones defined in zones.lua.
+    ]]
+
+    return {
+        { -- City location, in La Peurta
+            -- Spawn coordinates of the ped.
+            coords = vec4(-354.77, -1545.90, 27.72, 271.61), -- vector4
+
+            -- The distance at which to load the ped in. Probably shouldn't touch this.
+            distance = 100, -- integer.
+
+            -- The minimum zones to complete.
+            minZones = 4, -- integer
+
+            -- The maximum zones to complete.
+            maxZones = 8, -- integer.
+
+            -- Ped configuration options.
+            ped = {
+                -- Ped model to spawn. Please note the usage of backticks (`) and not (") or (')
+                model = `s_m_y_garbage`,
+
+                -- Scenario to play on the ped.
+                -- You MUST choose EITHER an animation OR a scenario to play.
+                scenario = "WORLD_HUMAN_AA_SMOKE",
+
+                -- animation instead of scenario.
+                -- anim = { 
+                --     clip = "animation_clip",
+                --     dict = "animation_dict"
+                -- }
+            },
+
+            -- All possible vehicle spawn locations, if a spot already has a vehicle in it then it'll use the next one.
+            vehicleSpawns = {
+                --- vector4
+                vec4(-346.60, -1570.10, 24.94, 22.92),
+                vec4(-316.15, -1539.22, 27.39, 336.40)
+            },
+
+            -- Possible locations that the vehicle can be returned at, if manual returns are enabled.
+            vehicleReturns = {
+                -- vector3
+                vec3(-346.60, -1570.10, 24.94),
+                vec3(-316.15, -1539.22, 27.39)
+            },
+
+            -- Possible locations that the vehicle can be unloaded at.
+            vehicleUnloads = {
+                -- vector3
+                vec3(-352.61, -1558.93, 25.2)
+            },
+
+            -- this is only used if u have separateLockers enabled.
+            lockers = {
+                -- vector3
+                vec3(-322.25, -1545.85, 31.02)
+            },
+
+            -- Blip configuration.
+            -- For colors & sprites see https://docs.fivem.net/docs/game-references/blips/
+            blip = {
+                -- Enable or disable the blip.
+                enabled = true, -- boolean.
+
+                -- Blip Sprite
+                sprite = 318, -- integer
+
+                -- Blip Color
+                color = 52, -- integer
+
+                -- Blip Scale
+                scale = 0.8, -- integer
+
+                -- Blip Label
+                label = "Garbage Job", -- string
+            },
+
+            -- The zones that will be chosen randomly for this location.
+            -- This is used to, optionally, prevent players from being sent to the county from the cit and visa versa.
+            -- The zone MUST exist in `data/zones.lua`.
+            zones = {
+                "CYPRE",
+                "DAVIS",
+                "STRAW",
+                "KOREAT",
+                "DELPE",
+                "MORN",
+                "BURTON",
+                "WVINE",
+                "HAWICK",
+                "DTVINE",
+                "MIRR",
+                "RICHM",
+                "BHAMCA",
+                "CHU",
+                "OBSERV",
+                "TEXTI",
+                "SKID"
+            }
+        },
+
+        { -- Sandy Shores Location, at the recycling yard
+            coords = vec4(2338.47, 3131.64, 48.21, 79.02),
+            distance = 100,
+            minZones = 2,
+            maxZones = 5,
+            ped = {
+                model = `s_m_y_garbage`,
+                scenario = "WORLD_HUMAN_AA_SMOKE",
+            },
+            vehicleSpawns = {
+                vec4(2346.04, 3107.17, 48.23, 76.96),
+                vec4(2341.34, 3153.32, 48.17, 123.11),
+                vec4(2366.58, 3121.34, 48.43, 158.04)
+            },
+            vehicleReturns = {
+                vec3(2367.56, 3139.97, 48.07)
+            },
+            vehicleUnloads = {
+                vec3(2418.71, 3149.08, 48.04)
+            },
+            lockers = {
+                vec3(2355.85, 3144.48, 48.21)
+            },
+            blip = {
+                enabled = true,
+                sprite = 318,
+                color = 52,
+                scale = 0.8,
+                label = "Garbage Job",
+            },
+            zones = {
+                "DESRT",
+                "PALETO",
+                "GRAPES",
+                "SANDY",
+                "HARMO"
+            }
+        },
+    }
+    ```
+  </Tab>
+
+  <Tab value="outfits.lua">
+    ```lua
+        --[[
+            Employee Uniforms Configuration
+        
+            This file defines all available outfits.
+            Outfits are separated by gender and labeled for easy reference.
+        
+            ---------------------------------------------------------
+            OPTION EXPLANATIONS
+            ---------------------------------------------------------
+        
+            grade
+                - Number indicating the required job grade to use this outfit.
+                - Example: 0 = basic employee, 3 = supervisor/advanced uniform.
+        
+            image
+                - URL or path to an image representing the outfit (optional).
+                - Useful for UI preview.
+        
+            description
+                - description for the outfit (optional).
+        
+            clothing
+                - Defines each clothing/prop slot for the ped.
+                - drawable = model ID for the clothing/prop. Use -1 to leave the ped's current item unchanged.
+                - texture  = variant of the drawable (0 is default).
+                - Slots include:
+                    - undershirt
+                    - torso
+                    - torso2
+                    - shoes
+                    - leg
+                    - badge
+                    - bag
+                    - mask
+                    - accessory
+                    - kevlar
+                    - watch
+                    - hat
+                    - glasses
+                    - ears
+                    - bracelets
+        
+            ---------------------------------------------------------
+            ADDING NEW LOCATIONS
+            ---------------------------------------------------------
+        
+            Simply copy an existing block, paste it underneath, and update:
+        
+                - label
+                - grade (optional)
+                - description (optional)
+                - clothing
+        
+            This allows unlimited job sites around the map (LS city, county, custom MLOs, etc.).
+        
+            ---------------------------------------------------------
+            NOTES
+            ---------------------------------------------------------
+            
+            - Any slot omitted or set to { drawable = -1 } will not be changed when applying the outfit.
+            - You can add more outfits by following this same structure.
+            - Ensure names are unique per gender.
+            - You can use the command /getclothing-garbage to copy your characters current clothing.
+        ]]
+        
+        return {
+            male = {
+                ["Employee Uniform"] = {
+                    grade = 0,
+                    image = "",
+                    description = "",
+                    clothing = {
+                        undershirt = { drawable = 59, texture = 0 },
+                        torso = { drawable = 63, texture = 0 },
+                        torso2 = { drawable = 56, texture = 0 },
+                        shoes = { drawable = 24, texture = 0 },
+                        leg = { drawable = 36, texture = 0 },
+                        badge = { drawable = 0, texture = 0 },
+                        bag = { drawable = 0, texture = 0 },
+                        mask = { drawable = 0, texture = 0 },
+                        accessory = { drawable = 0, texture = 0 },
+                        kevlar = { drawable = 0, texture = 0 },
+                        watch = { drawable = -1, texture = 0 },
+                        hat = { drawable = -1, texture = 0 },
+                        glasses = { drawable = -1, texture = 0 },
+                        ears = { drawable = -1, texture = 0 },
+                        bracelets = { drawable = -1, texture = 0 },
+                    }
+                },
+                ["Employee Uniform w/ Jacket"] = {
+                    grade = 3,
+                    image = "",
+                    description = "",
+                    clothing = {
+                        undershirt = { drawable = 59, texture = 0 },
+                        torso = { drawable = 64, texture = 0 },
+                        torso2 = { drawable = 57, texture = 0 },
+                        shoes = { drawable = 24, texture = 0 },
+                        leg = { drawable = 36, texture = 0 },
+                        badge = { drawable = 0, texture = 0 },
+                        bag = { drawable = 0, texture = 0 },
+                        mask = { drawable = 0, texture = 0 },
+                        accessory = { drawable = 0, texture = 0 },
+                        kevlar = { drawable = 0, texture = 0 },
+                        watch = { drawable = -1, texture = 0 },
+                        hat = { drawable = -1, texture = 0 },
+                        glasses = { drawable = -1, texture = 0 },
+                        ears = { drawable = -1, texture = 0 },
+                        bracelets = { drawable = -1, texture = 0 },
+                    }
+                },
+            },
+            female = {
+                ["Employee Uniform"] = {
+                    grade = 0,
+                    image = "",
+                    description = {},
+                    clothing = {
+                        undershirt = { drawable = 14, texture = 0 },
+                        torso = { drawable = 83, texture = 0 },
+                        torso2 = { drawable = 49, texture = 0 },
+                        shoes = { drawable = 24, texture = 0 },
+                        leg = { drawable = 35, texture = 0 },
+                        badge = { drawable = 0, texture = 0 },
+                        bag = { drawable = 0, texture = 0 },
+                        mask = { drawable = 0, texture = 0 },
+                        accessory = { drawable = 0, texture = 0 },
+                        kevlar = { drawable = 0, texture = 0 },
+                        watch = { drawable = -1, texture = 0 },
+                        hat = { drawable = -1, texture = 0 },
+                        glasses = { drawable = -1, texture = 0 },
+                        ears = { drawable = -1, texture = 0 },
+                        bracelets = { drawable = -1, texture = 0 },
+                    }
+                },
+                ["Employee Uniform w/ Jacket"] = {
+                    grade = 3,
+                    image = "",
+                    description = {},
+                    clothing = {
+                        undershirt = { drawable = 14, texture = 0 },
+                        torso = { drawable = 83, texture = 0 },
+                        torso2 = { drawable = 50, texture = 0 },
+                        shoes = { drawable = 24, texture = 0 },
+                        leg = { drawable = 35, texture = 0 },
+                        badge = { drawable = 0, texture = 0 },
+                        bag = { drawable = 0, texture = 0 },
+                        mask = { drawable = 0, texture = 0 },
+                        accessory = { drawable = 0, texture = 0 },
+                        kevlar = { drawable = 0, texture = 0 },
+                        watch = { drawable = -1, texture = 0 },
+                        hat = { drawable = -1, texture = 0 },
+                        glasses = { drawable = -1, texture = 0 },
+                        ears = { drawable = -1, texture = 0 },
+                        bracelets = { drawable = -1, texture = 0 },
+                    }
+                },
+            }
+        }
+    ```
+  </Tab>
+
+  <Tab value="props.lua">
+    ```lua
+        --[[
+            Garbage Objects Configuration
+        
+            This file defines all the trash objects that players can interact with in the garbage job.
+            Objects are divided into three categories:
+                - dumpsters
+                - bins
+                - bags
+        
+            Each entry defines the type of trash, how much trash it contains, and special behavior.
+        
+            ---------------------------------------------------------
+            OPTION EXPLANATIONS
+            ---------------------------------------------------------
+                - minAmount / maxAmount
+                    - The range of trash to collect from this object.
+        
+                - carryModel
+                    - Only for bags. Defines the model that the player will carry when picking up the object.
+        
+                - offset
+                    - Only for bags. Defines the position and rotation offsets for the carried model.
+                    - loc = vec3(x, y, z) → position offset
+                    - rot = vec3(x, y, z) → rotation offset
+        
+                - shouldDelete
+                    - Boolean flag, only used in bags.
+                    - If true, the object will be deleted after being picked up.
+                    - Bags on the ground with other trash attached to them often need to be deleted, while dumpsters and bins usually remain.
+        
+            ---------------------------------------------------------
+            NOTES
+            ---------------------------------------------------------
+        
+            - Dumpsters and bins do not require offset or carryModel.
+            - Bags usually require both offset and carryModel for proper attachment to the ped.
+            - All props are referenced by their model name using backticks (`), not quotes.
+            - This already includes every prop the game that functions cleanly, 
+                - You can add the larger dumpsters however the truck w/ forks will not be able to pick them up and they will clip with the other trucks.
+        ]]
+        
+        return {
+            dumpsters = { -- These are dumpsters that you will pick up and move to the back or front of the truck to empty.
+                [`prop_dumpster_01a`] = {
+                    minAmount = 100,
+                    maxAmount = 800,
+                },
+                [`prop_dumpster_02a`] = {
+                    minAmount = 100,
+                    maxAmount = 800,
+                },
+                [`m23_2_prop_m32_dumpster_01a`] = {
+                    minAmount = 100,
+                    maxAmount = 800,
+                },
+                [`prop_dumpster_02b`] = {
+                    minAmount = 100,
+                    maxAmount = 800,
+                },
+                [`prop_cs_dumpster_01a`] = {
+                    minAmount = 100,
+                    maxAmount = 800,
+                },
+            },
+            bins = { -- These are bins that you will pick up and move to the back of the truck to empty.
+                [`prop_cs_bin_01`] = {
+                    minAmount = 100,
+                    maxAmount = 600
+                },
+                [`prop_cs_bin_01_skinned`] = {
+                    minAmount = 100,
+                    maxAmount = 600
+                },
+                [`prop_snow_bin_02`] = {
+                    minAmount = 100,
+                    maxAmount = 600
+                },
+                [`prop_cs_bin_03`] = {
+                    minAmount = 100,
+                    maxAmount = 600
+                },
+                [`prop_bin_08open`] = {
+                    minAmount = 100,
+                    maxAmount = 600
+                },
+                [`prop_bin_08a`] = {
+                    minAmount = 100,
+                    maxAmount = 600
+                },
+            },
+            bags = { -- These are bag props or props to grab a bag out of.
+                [`prop_bin_01a`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `hei_prop_heist_binbag`,
+                    offset = {
+                        loc = vec3(0.09, -0.03, -0.01),
+                        rot = vec3(-95.75, 0.0, 38.5)
+                    },
+                    shouldDelete = false,
+                },
+                [`prop_bin_11a`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `hei_prop_heist_binbag`,
+                    offset = {
+                        loc = vec3(0.09, -0.03, -0.01),
+                        rot = vec3(-95.75, 0.0, 38.5)
+                    },
+                    shouldDelete = false,
+                },
+                [`prop_bin_09a`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `hei_prop_heist_binbag`,
+                    offset = {
+                        loc = vec3(0.09, -0.03, -0.01),
+                        rot = vec3(-95.75, 0.0, 38.5)
+                    },
+                    shouldDelete = false,
+                },
+                [`prop_bin_02a`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `hei_prop_heist_binbag`,
+                    offset = {
+                        loc = vec3(0.09, -0.03, -0.01),
+                        rot = vec3(-95.75, 0.0, 38.5)
+                    },
+                    shouldDelete = false,
+                },
+                [`prop_bin_06a`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `hei_prop_heist_binbag`,
+                    offset = {
+                        loc = vec3(0.09, -0.03, -0.01),
+                        rot = vec3(-95.75, 0.0, 38.5)
+                    },
+                    shouldDelete = false,
+                },
+                [`prop_bin_04a`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `hei_prop_heist_binbag`,
+                    offset = {
+                        loc = vec3(0.09, -0.03, -0.01),
+                        rot = vec3(-95.75, 0.0, 38.5)
+                    },
+                    shouldDelete = false,
+                },
+                [`prop_bin_07d`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `hei_prop_heist_binbag`,
+                    offset = {
+                        loc = vec3(0.09, -0.03, -0.01),
+                        rot = vec3(-95.75, 0.0, 38.5)
+                    },
+                    shouldDelete = false,
+                },
+                [`prop_bin_07b`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `hei_prop_heist_binbag`,
+                    offset = {
+                        loc = vec3(0.09, -0.03, -0.01),
+                        rot = vec3(-95.75, 0.0, 38.5)
+                    },
+                    shouldDelete = false,
+                },
+                [`prop_bin_11b`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `hei_prop_heist_binbag`,
+                    offset = {
+                        loc = vec3(0.09, -0.03, -0.01),
+                        rot = vec3(-95.75, 0.0, 38.5)
+                    },
+                    shouldDelete = false,
+                },
+                [`prop_bin_07c`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `hei_prop_heist_binbag`,
+                    offset = {
+                        loc = vec3(0.09, -0.03, -0.01),
+                        rot = vec3(-95.75, 0.0, 38.5)
+                    },
+                    shouldDelete = false,
+                },
+                [`prop_bin_01a_old`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `hei_prop_heist_binbag`,
+                    offset = {
+                        loc = vec3(0.09, -0.03, -0.01),
+                        rot = vec3(-95.75, 0.0, 38.5)
+                    },
+                    shouldDelete = false,
+                },
+                [`hei_prop_heist_binbag`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `hei_prop_heist_binbag`,
+                    offset = {
+                        loc = vec3(0.09, -0.03, -0.01),
+                        rot = vec3(-95.75, 0.0, 38.5)
+                    },
+                    shouldDelete = true,
+                },
+                [`p_binbag_01_s`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `p_binbag_01_s`,
+                    offset = {
+                        loc = vec3(0.39, -0.18, -0.01),
+                        rot = vec3(-32.6, -71.10, 37.5)
+                    },
+                    shouldDelete = true,
+                },
+                [`prop_cs_street_binbag_01`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `prop_cs_street_binbag_01`,
+                    offset = {
+                        loc = vec3(0.39, -0.18, -0.01),
+                        rot = vec3(-32.6, -71.10, 37.5)
+                    },
+                    shouldDelete = true,
+                },
+                [`prop_rub_binbag_01`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `prop_rub_binbag_01`,
+                    offset = {
+                        loc = vec3(0.33, -0.29, 0.17),
+                        rot = vec3(-93.6, 0.0, 42.4)
+                    },
+                    shouldDelete = true,
+                },
+                [`prop_rub_binbag_08`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `prop_rub_binbag_sd_01`,
+                    offset = {
+                        loc = vec3(0.38, -0.3, 0.07),
+                        rot = vec3(-32.6, -71.10, 27.1)
+                    },
+                    shouldDelete = true,
+                },
+                [`prop_rub_binbag_sd_01`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `prop_rub_binbag_sd_01`,
+                    offset = {
+                        loc = vec3(0.38, -0.3, 0.07),
+                        rot = vec3(-32.6, -71.10, 27.1)
+                    },
+                    shouldDelete = true,
+                },
+                [`prop_rub_binbag_06`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `prop_rub_binbag_01`,
+                    offset = {
+                        loc = vec3(0.33, -0.29, 0.17),
+                        rot = vec3(-93.6, 0.0, 42.4)
+                    },
+                    shouldDelete = true,
+                },
+                [`prop_cs_rub_binbag_01`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `prop_rub_binbag_01`,
+                    offset = {
+                        loc = vec3(0.33, -0.29, 0.17),
+                        rot = vec3(-93.6, 0.0, 42.4)
+                    },
+                    shouldDelete = true,
+                },
+                [`prop_rub_binbag_04`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `prop_rub_binbag_04`,
+                    offset = {
+                        loc = vec3(0.02, -0.96, 0.17),
+                        rot = vec3(-98.99, -0.02, -0.05)
+                    },
+                    shouldDelete = true,
+                },
+                [`prop_rub_binbag_sd_02`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `prop_rub_binbag_sd_02`,
+                    offset = {
+                        loc = vec3(0.02, -0.96, 0.17),
+                        rot = vec3(-98.99, -0.02, -0.05)
+                    },
+                    shouldDelete = true,
+                },
+                [`p_rub_binbag_test`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `p_rub_binbag_test`,
+                    offset = {
+                        loc = vec3(0.3, -0.35, 0.11),
+                        rot = vec3(-98.99, -0.02, -0.05)
+                    },
+                    shouldDelete = true,
+                },
+                [`ng_proc_binbag_02a`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `ng_proc_binbag_02a`,
+                    offset = {
+                        loc = vec3(0.4, -0.28, 0.04),
+                        rot = vec3(-29.0, -100.51, 0.0)
+                    },
+                    shouldDelete = true,
+                },
+                [`bkr_prop_fakeid_binbag_01`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `bkr_prop_fakeid_binbag_01`,
+                    offset = {
+                        loc = vec3(0.54, -0.4, -0.03),
+                        rot = vec3(-45.7, -97.3, 0.0)
+                    },
+                    shouldDelete = true,
+                },
+                [`ng_proc_binbag_01a`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `ng_proc_binbag_01a`,
+                    offset = {
+                        loc = vec3(0.4, -0.28, 0.04),
+                        rot = vec3(-29.0, -100.51, 0.0)
+                    },
+                    shouldDelete = true,
+                },
+                [`ch_chint10_binbags_smallroom_01`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `hei_prop_heist_binbag`,
+                    offset = {
+                        loc = vec3(0.09, -0.03, -0.01),
+                        rot = vec3(-95.75, 0.0, 38.5)
+                    },
+                    shouldDelete = true,
+                },
+                [`prop_rub_binbag_01b`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `hei_prop_heist_binbag`,
+                    offset = {
+                        loc = vec3(0.09, -0.03, -0.01),
+                        rot = vec3(-95.75, 0.0, 38.5)
+                    },
+                    shouldDelete = true,
+                },
+                [`prop_rub_binbag_05`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `prop_rub_binbag_05`,
+                    offset = {
+                        loc = vec3(0.26, -0.64, -0.07),
+                        rot = vec3(-72.6, -72.83, 0.3)
+                    },
+                    shouldDelete = true,
+                },
+                [`prop_rub_binbag_03`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `prop_rub_binbag_05`,
+                    offset = {
+                        loc = vec3(0.26, -0.64, -0.07),
+                        rot = vec3(-72.6, -72.83, 0.3)
+                    },
+                    shouldDelete = true,
+                },
+                [`prop_rub_binbag_03b`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `prop_rub_binbag_01`,
+                    offset = {
+                        loc = vec3(0.33, -0.29, 0.17),
+                        rot = vec3(-93.6, 0.0, 42.4)
+                    },
+                    shouldDelete = true,
+                },
+                [`prop_id_rub_binbag_01`] = {
+                    minAmount = 100,
+                    maxAmount = 300,
+                    carryModel = `prop_rub_binbag_01`,
+                    offset = {
+                        loc = vec3(0.33, -0.29, 0.17),
+                        rot = vec3(-93.6, 0.0, 42.4)
+                    },
+                    shouldDelete = true,
+                },
+            }
+        }
+    ```
+  </Tab>
+
+  <Tab value="zone_names.lua">
+    ```lua
+        -- This file is purely to adjust the names of zones if you have customized them, chances are you will not need to edit anything in this file.
+        {
+            AIRP = "Los Santos International Airport",
+            ALAMO = "Alamo Sea",
+            ALTA = "Alta",
+            ARMYB = "Fort Zancudo",
+            BANHAMC = "Banham Canyon Dr",
+            BANNING = "Banning",
+            BAYTRE = "Baytree Canyon",
+            BEACH = "Vespucci Beach",
+            BHAMCA = "Banham Canyon",
+            BRADP = "Braddock Pass",
+            BRADT = "Braddock Tunnel",
+            BURTON = "Burton",
+            CALAFB = "Calafia Bridge",
+            CANNY = "Raton Canyon",
+            CCREAK = "Cassidy Creek",
+            CHAMH = "Chamberlain Hills",
+            CHIL = "Vinewood Hills",
+            CHU = "Chumash",
+            CMSW = "Chiliad Mountain State Wilderness",
+            CYPRE = "Cypress Flats",
+            DAVIS = "Davis",
+            DELBE = "Del Perro Beach",
+            DELPE = "Del Perro",
+            DELSOL = "La Puerta",
+            DESRT = "Grand Senora Desert",
+            DOWNT = "Downtown",
+            DTVINE = "Downtown Vinewood",
+            EAST_V = "East Vinewood",
+            EBURO = "El Burro Heights",
+            ELGORL = "El Gordo Lighthouse",
+            ELYSIAN = "Elysian Island",
+            GALFISH = "Galilee",
+            GALLI = "Galileo Park",
+            GOLF = "GWC and Golfing Society",
+            GRAPES = "Grapeseed",
+            GREATC = "Great Chaparral",
+            HARMO = "Harmony",
+            HAWICK = "Hawick",
+            HORS = "Vinewood Racetrack",
+            HUMLAB = "Humane Labs and Research",
+            JAIL = "Bolingbroke Penitentiary",
+            KOREAT = "Little Seoul",
+            LACT = "Land Act Reservoir",
+            LAGO = "Lago Zancudo",
+            LDAM = "Land Act Dam",
+            LEGSQU = "Legion Square",
+            LMESA = "La Mesa",
+            LOSPUER = "La Puerta",
+            MIRR = "Mirror Park",
+            MORN = "Morningwood",
+            MOVIE = "Richards Majestic",
+            MTCHIL = "Mount Chiliad",
+            MTGORDO = "Mount Gordo",
+            MTJOSE = "Mount Josiah",
+            MURRI = "Murrieta Heights",
+            NCHU = "North Chumash",
+            NOOSE = "N.O.O.S.E",
+            OBSERV = "Galileo Observatory",
+            OCEANA = "Pacific Ocean",
+            PALCOV = "Paleto Cove",
+            PALETO = "Paleto Bay",
+            PALFOR = "Paleto Forest",
+            PALHIGH = "Palomino Highlands",
+            PALMPOW = "Palmer-Taylor Power Station",
+            PBLUFF = "Pacific Bluffs",
+            PBOX = "Pillbox Hill",
+            PROCOB = "Procopio Beach",
+            RANCHO = "Rancho",
+            RGLEN = "Richman Glen",
+            RICHM = "Richman",
+            ROCKF = "Rockford Hills",
+            RTRAK = "Redwood Lights Track",
+            SANAND = "San Andreas",
+            SANCHIA = "San Chianski Mountain Range",
+            SANDY = "Sandy Shores",
+            SKID = "Mission Row",
+            SLAB = "Stab City",
+            STAD = "Maze Bank Arena",
+            STRAW = "Strawberry",
+            TATAMO = "Tataviam Mountains",
+            TERMINA = "Terminal",
+            TEXTI = "Textile City",
+            TONGVAH = "Tongva Hills",
+            TONGVAV = "Tongva Valley",
+            VCANA = "Vespucci Canals",
+            VESP = "Vespucci",
+            VINE = "Vinewood",
+            WINDF = "Ron Alternates Wind Farm",
+            WVINE = "West Vinewood",
+            ZANCUDO = "Zancudo River",
+            ZP_ORT = "Port of South Los Santos",
+            ZQ_UAR = "Davis Quartz",
+            PROL = "Prologue / North Yankton",
+            ISHeist = "Cayo Perico Island"
+        }
+    ```
+  </Tab>
+
+  <Tab value="zones.lua">
+    ```lua
+        --[[
+            This file defines all possible garbage collection zones and their configuration options.
+        
+            Each key corresponds to a valid GTA zone code (https://docs.fivem.net/docs/game-references/zones/), and the configuration inside
+            controls how the job behave when assigned to that area.
+        
+            You can freely add, remove, or modify zones to match your server's design and balance.
+        
+            ---------------------------------------------------------
+            OPTION EXPLANATIONS
+            ---------------------------------------------------------
+        
+            Additionally, the "DAVIS" zone has comments outlining how to lay out the zones.
+        
+            - coords
+                - The central location for the zone, this is currently just used for the map blip.
+        
+            - blip
+                - The blip configuration info.
+        
+            - maxCollection
+                - The maximum amount of trash that can be collected from this zone before moving to another.
+        
+            - repeatable
+                - Whether the player can be assigned to this zone more than once in a single run.
+        
+            - trashYieldMultiplier
+                - Modifies the base amount of trash generated from collected objects in this zone.
+                Example: 1.5 = 50% more trash yield.
+        
+            - minTruckCapacity
+                - The minimum truck capacity required for this zone to be assigned.
+                (Useful for large dumpster-only or industrial zones.)
+        
+            - payoutMultiplier
+                - Multiplies the final payout when players finish routes in this zone.
+                Example: 1.2 = 20% more money.
+        
+            - allowedTypes
+                - Determines what trash types are available to collect.
+                Example:
+                    allowedTypes = {
+                        bags = true, -- ALlows players to grab bags
+                        bins = true, -- Allows players to grab bins
+                        dumpsters = false -- Disallows players to grab dumpsters
+                    }
+        
+            - cooldown
+                - Time (in seconds) before this zone can be re-assigned again to the same player/group.
+        
+            - itemRewards
+                - Optional random item drops that can be given while collecting trash in this zone.
+                Each entry supports:
+                    item        = string    -- Item name.
+                    chance      = integer   -- 0–100 percentage chance to roll.
+                    amount      = number | {min, max} -- Amount or range.
+                    metadata    = table     -- Optional metadata for inventories.
+        
+        
+            
+            -- Included Zones:
+            
+            "CYPRE"  - Cypress Flats
+            "DAVIS"  - Davis
+            "STRAW"  - Strawberry
+            "KOREAT" - Little Seoul
+            "DELPE"  - Del Perro
+            "MORN"   - Morningwood
+            "BURTON" - Burton
+            "WVINE"  - West Vinewood
+            "HAWICK" - Hawick
+            "DTVINE" - Downtown Vinewood
+            "MIRR"   - Mirror Park
+            "RICHM"  - Richman
+            "BHAMCA" - Banham Canyon
+            "CHU"    - Chumash
+            "HARMO"  - Harmony
+            "SANDY"  - Sandy Shores
+            "GRAPES" - Grapeseed
+            "OBSERV"- Galileo Observatory
+            "PALETO" - Paleto Bay
+            "DESRT" - Grand Senora Desert
+            "TEXTI"  - Textile City
+            "SKID"   - Mission Row
+        
+            Each zone entry below should follow this structure:
+            {
+                maxCollection = number,
+                repeatable = boolean,
+                trashYieldMultiplier = number,
+                minTruckCapacity = number,
+                payoutMultiplier = number,
+                allowedTypes = { bags = bool, bins = bool, dumpsters = bool },
+                cooldown = number,
+                itemRewards = {
+                    { item = string, chance = number, amount = number|{min, max}, metadata = table? }
+                }
+            }
+        ]]
+        
+        
+        return {
+            ['DAVIS'] = {
+                -- Zone coordinates
+                coords = vec3(101.01, -1859.0, 24.72),
+        
+                -- Blip configuration
+                blip = {
+                    sprite = 161,
+                    color = 69,
+                    scale = 3.0
+                },
+        
+                -- The maximum amount of trash that can be collected from this zone before sending the player to the next one.
+                maxCollection = 500,
+        
+                -- Should this zone be repeatable on the same trip? (Ie can the player be sent to this zone more than once per trip before unloading/clocking off.)
+                repeatable = false,
+        
+                -- How much trash is generated per object collected here.
+                -- Useful if you want different zones to yield different trash amounts.
+                trashYieldMultiplier = 1.0,
+        
+                -- Whether this zone should be preferred for larger trucks.
+                -- Example: large dumpsters only available in industrial areas.
+                -- NOTE: If you do not have at least one truck with this capacity, then this zone will never be assigned.
+                minTruckCapacity = 3000,
+        
+                -- Optional reward or payout multiplier (for high-effort zones like Paleto).
+                payoutMultiplier = 1.0,
+        
+                -- The allowed types of trash that can be collected from this zone.
+                allowedTypes = {
+                    bags = true,
+                    bins = true,
+                    dumpsters = true,
+                },
+        
+                -- Optional: cooldown before this zone can be assigned again (in seconds)
+                cooldown = 600,
+        
+                -- Possible item rewards that this zone can drop, if enabled.
+                itemRewards = {
+                    {
+                        -- Item name to give.
+                        item = 'metalscrap', -- string
+        
+                        -- percentage (0-100) chance to roll this item
+                        chance = 20, -- integer
+        
+                        -- The amount of items to give.
+                        -- Can be either a single digit or a table of {minimumCount, maximumCount}
+                        amount = {2, 6}, -- integer or {min, max}
+        
+                        -- optional metadata to pass to the inventory.
+                        metadata = {}
+                    },
+                    { item = 'plastic', chance = 50, amount = {5, 10} },
+                    { item = 'copper', chance = 100, amount = {5, 20} },
+                    { item = 'ammo-9', chance = 30, amount = {20, 50} },
+                    { item = 'ammo-rifle', chance = 10, amount = {10, 30} },
+                    { item = 'WEAPON_APPISTOL', chance = 15, amount = 1 },
+                    { item = 'WEAPON_SMG', chance = 10, amount = 1 },
+                    { item = 'WEAPON_ASSAULTRIFLE', chance = 3, amount = 1 },
+                }
+            },
+        }
+    ```
+  </Tab>
+</Tabs>
+
+## Bridge & Integration Configuration [#bridge--integration-configuration]
+
+All of the framework and resource integrations can be found in the `bridge` directory, we expect you to have at least a basic understanding of Lua & how to integrate with other resources to edit these. Minimal support will be provided. If you have anything you want to recommend we integrate with, please let us know and we'll try our best to add it!
+
+Included are about a dozen hook functions in the `bridge/hooks` directory, here you can integrate various functions.
+
+## Locals / Language [#locals--language]
+
+All of the respective language/locales & command names can be changed in the `locales` directory. Users can set their language via the `/ox_lib` command in-game if its enabled. If the language file doesn't exist, it defaults to English. You can set the default locale via `setr ox:locale en` convar in your server.cfg file. You can read more here: [https://coxdocs.dev/ox\_lib/Modules/Locale/Shared](https://coxdocs.dev/ox_lib/Modules/Locale/Shared)
+
+
+# Developers (/docs/paid/garbage-job/developers)
+
+
+
+
+
+Here you will find a basic list of how you can modify our resource if you are a developer. This assumes you have *at minimum* basic knowledge of how FiveM programming works and the lua scripting language.
+
+If you have any exports or events you need, please [contact](https://scuffedlabs.com/contact) us.
+
+*We will provide minimal assistance when integrating other resources or implementing your own features*
+
+## Hooks [#hooks]
+
+Various hooks exist for you to integrate your own features, these can be found in `bridge/hooks/server.lua` and `bridge/hooks/client.lua` respectively. All of these have comments explaining how they function.
+
+## Events & Callbacks [#events--callbacks]
+
+*Note: there are currently no accessible client events or callbacks at this time*
+
+<Tabs items="[&#x22;Server&#x22;]">
+  <Tab value="Server">
+    ### scfd\_garbagejob:fetchTruck [#scfd_garbagejobfetchtruck]
+
+    This is a callback to try and spawn a truck, this will run through *all* checks before executing.
+
+    ```lua
+    --- Attempts to spawn and setup the truck.
+    ---@param locationIndex number The table index from the locations.lua file.
+    ---@param vehData table vehicle configuration data.
+    ---@return boolean, string|integer?
+    local function spawnTruck(source, locationIndex, vehData)
+        return lib.callback.await("scfd_garbagejob:fetchTruck", false, source, locationIndex, vehData)
+    end
+    ```
+
+    ### scfd\_garbagejob:fetchTruckData [#scfd_garbagejobfetchtruckdata]
+
+    Fetches a players truck data, if it exists.
+
+    ```lua
+    --- Fetches a trucks data
+    ---@param source integer playerId
+    ---@return privateTruckData?
+    local function getTruckData(source)
+        return lib.callback.await("scfd_garbagejob:fetchTruckData", false, source)
+    end
+    ```
+
+    ### scfd\_garbagejob:returnTruck [#scfd_garbagejobreturntruck]
+
+    Attempts to return a players truck, if possible.
+
+    ```lua
+    --- Attempts to return a players truck if possible.
+    ---@param locationIndex integer Table index of location
+    ---@param returnPos vector3 The current position, this must match one of the positions within the location config.
+    TriggerServerEvent("scfd_garbagejob:returnTruck", src, locationIndex, returnPos)
+    ```
+
+    ### scfd\_garbagejob:clockIn [#scfd_garbagejobclockin]
+
+    Attempts to clock the player in, if possible.
+
+    ```lua
+    --- Attempts to clock a player in, if possible.
+    ---@param locationIndex integer Table index of location
+    TriggerServerEvent("scfd_garbagejob:clockIn", src, locationIndex)
+    ```
+
+    ### scfd\_garbagejob:clockOut [#scfd_garbagejobclockout]
+
+    Attempts to clock the player out, if possible.
+
+    ```lua
+    --- Attempts to clock the player out, if possible.
+    ---@param locationIndex integer Table index of location
+    TriggerServerEvent("scfd_garbagejob:clockOut", src, locationIndex)
+    ```
+  </Tab>
+</Tabs>
+
+## Exports [#exports]
+
+<Tabs items="[&#x22;Server&#x22;, &#x22;Client&#x22;]">
+  <Tab value="Server">
+    ### getPlayerTruck [#getplayertruck]
+
+    Return player's truck. If ownerOnly true, return only if player is owner
+
+    ```lua
+    ---Return player's truck. If ownerOnly true, return only if player is owner (fast via map).
+    ---@param src integer
+    ---@param ownerOnly boolean?
+    ---@return Truck?
+    local truckData = exports.scfd_garbagejob:getPlayerTruck(src, ownerOnly)
+    ```
+
+    ### handlePayout [#handlepayout]
+
+    Handles payout distribution and cleans up truck.
+
+    ```lua
+    ---Handle payout distribution and cleanup
+    ---@param src integer playerId
+    ---@param truck Truck truckData from `getPlayerTruck`
+    ---@param crew table? crew table.
+    exports.scfd_garbagejob:handlePayout(src, truck, crew)
+    ```
+
+    ### giveRandomItemReward [#giverandomitemreward]
+
+    Gives an item reward to player based on zone loot table
+
+    ```lua
+    ---Gives an item reward to player based on zone loot table
+    ---@param src integer playerId
+    ---@param zone string zoneId
+    exports.scfd_garbagejob:giveRandomItemReward(src, zone)
+    ```
+
+    ### getTruckConfigData [#gettruckconfigdata]
+
+    Gets a trucks config information from its model.
+
+    ```lua
+    --- Gets a trucks config information from its model.
+    ---@param model integer truckModel
+    ---@return table?
+    exports.scfd_garbagejob:getTruckConfigData(model)
+    ```
+
+    ### handleDeposit [#handledeposit]
+
+    Handles the deposit refund logic when a truck is returned.
+
+    ```lua
+    --- Handles the deposit refund logic when a truck is returned.
+    ---@param src integer Player ID returning the truck
+    ---@param truck Truck The truck being returned
+    exports.scfd_garbagejob:handleDeposit(src, truck)
+    ```
+
+    ### assignZoneToTruck [#assignzonetotruck]
+
+    Assigns a new random zone to a truck, or if there is no available zone returns nil
+
+    ```lua
+    --- Assigns a new random zone to a truck, or if there is no available zone returns nil
+    ---@param truck Truck truckData
+    ---@return string? newZone
+    local newZone = exports.scfd_garbagejob:assignZoneToTruck(truck)
+    ```
+
+    ### addTrashToZone [#addtrashtozone]
+
+    Adds trash to the trucks current zone, if the maxCollection amount is reached it will assign a new zone.
+
+    ```lua
+    --- Adds trash to the trucks current zone, if the maxCollection amount is reached it will assign a new zone.
+    ---@param truck Truck truckData
+    ---@param amount integer the amount of trash to add.
+    ---@return string? newZone
+    local newZone = exports.scfd_garbagejob:addTrashToZone(truck, amount)
+    ```
+  </Tab>
+
+  <Tab value="Client">
+    ### clockIn [#clockin]
+
+    Attempt to clock the player in.
+
+    ```lua
+    --- Attempt to clock the player in.
+    ---@param locationIndex integer table index for location
+    exports.scfd_garbagejob:clockIn(locationIndex)
+    ```
+
+    ### clockOut [#clockout]
+
+    Attempt to clock the player out.
+
+    ```lua
+    --- Attempt to clock the player out.
+    ---@param locationIndex integer table index for location
+    exports.scfd_garbagejob:clockOut(locationIndex)
+    ```
+
+    ### viewTrucks [#viewtrucks]
+
+    Opens the truck context menu to spawn a truck.
+
+    ```lua
+    --- Opens the truck context menu to spawn a truck.
+    ---@param locationIndex integer table index for location
+    exports.scfd_garbagejob:viewTrucks(locationIndex)
+    ```
+
+    ### collectPayment [#collectpayment]
+
+    Attempts to collect payment.
+
+    ```lua
+    --- Attempts to collect payment.
+    ---@param locationIndex integer table index for location
+    exports.scfd_garbagejob:collectPayment(locationIndex)
+    ```
+
+    ### returnTruck [#returntruck]
+
+    Attempts to return the players truck
+
+    ```lua
+    --- Attempts to return the players truck
+    ---@param locationIndex integer table index for location
+    ---@param inside boolean If the player is inside the truck or not.
+    ---@param zonePos vector3 The zone position from returnPoints for the specified location index. Must match.
+    exports.scfd_garbagejob:returnTruck(locationIndex, inside, zonePos)
+    ```
+
+    ### unloadTruck [#unloadtruck]
+
+    Attempts to unload the players truck, they must be inside
+
+    ```lua
+    --- Attempts to unload the players truck, they must be inside
+    ---@param locationIndex integer table index for location
+    ---@param zonePos vector3 The zone position from unloadPoints for the specified location index. Must match.
+    exports.scfd_garbagejob:unloadTruck(locationIndex, zonePos)
+    ```
+
+    ### addTrashToTruck [#addtrashtotruck]
+
+    Attempts to add trash to the truck.
+
+    ```lua
+    --- Attempts to add trash to the truck.
+    ---@param trashData {netId: integer, zone: string}
+    ---@param truckData {netId: integer, plate: string}
+    exports.scfd_garbagejob:addTrashToTruck(trashData, truckData)
+    ```
+
+    ### setOutfit [#setoutfit]
+
+    Sets a peds outfit
+
+    ```lua
+    --- Sets the peds outfit
+    ---@param ped integer pedID
+    ---@param outfitId string Outfit name from data file.
+    exports.scfd_garbagejob:setOutfit(ped, outfitId)
+    ```
+
+    ### resetOutfit [#resetoutfit]
+
+    Resets a peds outfit back to their previous one, if able.
+
+    ```lua
+    --- Resets a peds outfit back to their previous one, if able.
+    ---@param ped integer pedID
+    exports.scfd_garbagejob:resetOutfit(ped)
+    ```
+
+    ### openGroupMenu [#opengroupmenu]
+
+    Opens the group management menu.
+
+    ```lua
+    --- Opens the group management menu.
+    exports.scfd_garbagejob:openGroupMenu()
+    ```
+
+    ### leaveGroup [#leavegroup]
+
+    Leave the current group, if able
+
+    ```lua
+    --- Leave the current group, if able
+    exports.scfd_garbagejob:leaveGroup()
+    ```
+  </Tab>
+</Tabs>
+
+## Statebags [#statebags]
+
+You can view available states in `shared/const.lua` in the `CONST.STATES` table.
+
+
+# Garbage Job (/docs/paid/garbage-job)
+
+
+
+
+
+<ResourceBtns resource="advanced-garbage-job" />
+
+# Advanced Garbage Job [#advanced-garbage-job]
+
+SCFD GarbageJob is a fully dynamic and performance-optimized garbage collection job for FiveM, designed for realism, replay-ability, and server economy integration.
+
+Players can clock in, receive dynamically assigned trash zones across Los Santos and Blaine County, collect and unload trash, and earn configurable payouts with optional loot rewards.
+Each truck tracks its own progress, ensuring that every run feels unique and balanced for both solo and multi-player crews.
+
+## Key Features: [#key-features]
+
+* 🚛 Truck-Based Progression: Trash collection is tied directly to the truck, not the player - perfect for multi-person crews.
+* 👥 Multiplayer Groups: Players can create groups and invite their friends to participate in jobs with them.
+* 🗺️ Dynamic Zone System: Automatically assigns random zones based on cooldowns, distance, and truck capability.
+* ♻️ Configurable Trash Types: Supports bags, bins, and dumpsters with unique yield ranges.
+* 💰 Custom Rewards & Payouts: Add item drops, cash bonuses, or rarity-based loot pools per zone.
+* 🔁 Zone Cooldowns: Prevent repetitive routes and encourage players to explore the map.
+* ⚙️ Lightweight & Optimized: Built with performance, stability and scalability in mind.
+* 🧩 Fully Configurable: All data-driven via easily editable config and zone files.
+
+## Integration & Customization [#integration--customization]
+
+* Compatible with all major frameworks (QB, Qbox, ND, ESX) or works standalone.
+* Supports any\* inventory, target system, notifications, progressbars & skillchecks.
+* Bridge included with hooks to add your own integrations (ie, when trash is added to a truck, when a player is clocked in and out & more)
+* Detailed configuration files, allowing you to customize anything you need.
+* Full localization supporting any language, pre-configured for English out of the box.
+
+-# \* &#x2A;Only includes ox\_inventory, ox\_target, and ox\_lib by default. You will need to integrate your own and be sure it supports the required features.*
+
+## Documentation & Support [#documentation--support]
+
+* [Docs](https://docs.scuffedlabs.com)
+* [Support Discord](https://scuffedlabs.com/discord)
+* [Website](https://scuffedlabs.com)
+
+## Credits [#credits]
+
+* Main Ideas, Programming & testing by Scuffed Labs.
+* Thanks to xthrasherrr, scorpionong, novamonkey, and various members of the qbox discord for ideas & feedback.
+* All credit for included vehicles goes to original authors - Monkeypolice188, Rockstar Games, Weeby, Fenton, Compeast, Dexyfex and the CodeWalker Team, Eddlm, w\.., (Ambient), Lorify: The Workshop Team
+  * [https://www.gta5-mods.com/vehicles/brute-refuser-tipper-based-trashmaster-add-on-replace-liveries-template/](https://www.gta5-mods.com/vehicles/brute-refuser-tipper-based-trashmaster-add-on-replace-liveries-template/)
+  * [https://www.gta5-mods.com/vehicles/brute-master-b8-binmaster-b8-add-on-liveries-template-sound-custom-shards](https://www.gta5-mods.com/vehicles/brute-master-b8-binmaster-b8-add-on-liveries-template-sound-custom-shards)
+
+
+# Heli Crash (/docs/paid/helicrash)
+
+
+
+# King of the Hill (/docs/paid/koth)
+
+
+
+# World Interactions (/docs/paid/interactions)
+
+
+
+# Configuration (/docs/paid/police/configuration)
+
+
+
+# Complete Police System - Configuration [#complete-police-system---configuration]
+
+On this page we will go over how to configure TAM\_Police. All configuration files are in the `data/` directory.
+If you need any assistance or have any questions, please join our [Discord](https://discord.gg/YzC4Du7WY) for support.
+
+## Main Configuration [#main-configuration]
+
+The primary configuration file is `data/configuration.lua`. Here you will find all of the primary configuration options.
+
+```lua
+config.enableVersionCheck = true -- Should we check for updates on startup.
+
+config.debug = true -- Enables various debug commands.
+
+config.logger = true -- Enable or disable lib.logger support. 
+
+config.useInventory = true -- This is required for most evidence to work & for any of the item checks to function.
+
+config.checkDuty = true -- Require that a player is onDuty before allowing them to interact.
+
+config.groups = { -- Groups & grades
+    -- groupName = groupGrade
+    police = 0,
+}
+
+config.dutySystem = {
+    enabled = true, -- Enables the duty system. This allows players to to go on and off duty by interacting with a ped via third eye.
+    target = {
+        enabled = true, -- Enable or disable the target.
+        icon = "fas fa-clipboard-user", -- Font awesome icon.
+        distance = 1.5 -- Interact distance.
+    },
+    commandEnabled = false, -- enable or disable the duty commands.
+}
+
+config.fines = {
+    enabled = true, -- enables or disables the fining system.
+    maxAmount = 5000, -- Maximum amount that a player can be fined.
+    minAmount = 100, -- Minimum amount that a player can be fined.
+    command = {
+        enabled = true, -- Enables or disables the fine command.
+        distance = 2 -- The distance to check nearby players from.
+    },
+    target = {
+        enabled = true, -- Enables or disables the target
+        icon = "fas fa-file-invoice-dollar", -- Font awesome icon
+        distance = 2 -- Interact distance.
+    }
+}
+
+config.jailing = {
+    enabled = true, -- Enables or disables the jailing system. This currently only integrates with your framework or picke_prisons/xt-prison. You can add more in the bridge files.
+    minTime = 5, -- Minimum time in seconds that a player can be jailed for.
+    maxTime = 300, -- Maximum time in seconds that a player can be jailed for.
+    requireCuffed = true, -- Require the player to be cuffed to jail
+    command = {
+        enabled = true, -- Enable the jailing command.
+        distance = 2 -- The distance to check for nearby players.
+    },
+    target = {
+        enabled = true, -- Enable the target to jail another player.
+        icon = "fas fa-user-lock", -- Font awesome icon.
+        distance = 2 -- Interact distance
+    }
+}
+
+config.alertPeds = {
+    enabled = true, -- Enables or disables the "Alert Police" peds that can spawn at stations.
+    cooldown = 60, -- Time in seconds before someone can alert police again.
+    target = { -- Target is the only way to interact with these, we plan on adding more ways to in the future.
+        icon = 'fa-solid fa-bell', -- Font awesome icon.
+        distance = 3 -- Interact Distance
+    }
+}
+
+config.interactions = {
+    enabled = true, -- Enable the various interactions
+    cuffs = {
+        enabled = true, -- Enable cuff system
+        enableExports = true, -- Enable or disable exports - This is ignored if Config.useInventory is set to true.
+        requireDuty = { -- Require duty for specific tasks.
+            cuff = true,
+            uncuff = false,
+            ziptie = false,
+            unziptie = false,
+        },
+        requireHandsUp = false, -- Should players be required to have their hands up in order be cuffed ?
+        cuffItem = "handcuffs", -- Item required to cuff players. Set to false for no restriction. ie "handcuffs"
+        unCuffItem = "handcuffkeys", -- Item required to un-cuff players. Set to false for no restriction. ie "handcuffkeys"
+        zipTieItem = "zipties", -- Item required to zip-tie players. ie "zipties"
+        unZipItem = {"cutters", "wirecutters"}, -- Item(s) require to un-zip-tie players. ie "wirecutters" | {"cutters", "wirecutters"}
+        target = {
+            enabled = true, -- Enable target to cuff / ziptie / uncuff players
+            icon = "fas fa-handcuffs", -- Font awesome icon
+            distance = 1.5 -- Interact distance
+        },
+        command = {
+            enabled = true, -- Enable command to cuff / ziptie / uncuff players
+            distance = 2 -- Distance to check for nearby players.
+        },
+    },
+    escorting = {
+        enabled = true, -- Enable the escort system.
+        requireCuffed = true, -- Should players be required to be cuffed in order to be escorted? This will still play the cuffed animation if disabled due to limitations.
+        allowDead = false, -- Should players be able to escort a dead player? This will still play the cuffed animation due to limitations.
+        requireDuty = true, -- Should players need to be on duty to escort another player?
+        target = {
+            enabled = true, -- Enable target to escort / seat into vehicles
+            icon = "fas fa-hands-bound", -- Font awesome icon
+            seatIcon = "fas fa-right-to-bracket", -- Font awesome icon for putting players in a vehicle.
+            distance = 1.5 -- Interact distance
+        },
+        command = {
+            enabled = true, -- Enable command to escort / seat into vehicles
+            distance = 2.0 -- Distance to check for nearby players.
+        },
+        keybind = {
+            enabled = true, -- Enable the keybind to toggle escorting a player.
+            defaultKey = "G", -- The default key to toggle escorting a nearby player.
+            defaultMapper = "KEYBOARD", -- default key mapper to toggle escorting a nearby player, ie controller keybind.
+            secondaryKey = nil, -- Secondary key to toggle escorting a nearby player, ie controller keybind.
+            secondaryMapper = nil -- Secondary key mapper to toggle escorting a nearby player, ie controller keybind.
+        }
+    },
+    searching = {
+        enabled = true, -- Enable the ability to search other players.
+        requireCuffed = true, -- Should a player need to be cuffed to be searched
+        allowDead = false, -- Should players be able to search other players while dead.
+        requireDuty = true, -- Should players need to be on duty to search another player.
+        target = {
+            enabled = true, -- Enable target to search players
+            icon = "fas fa-magnifying-glass", -- Font awesome icon
+            distance = 1.5 -- Interact distance
+        },
+        command = {
+            enabled = true, -- Enable command to search players
+            distance = 2.0 -- The distance to check for nearby players.
+        }
+    }
+}
+
+config.handsUp = {
+    enabled = true, -- Enables the hands up module.
+    keybinds = {
+        enabled = true, -- enables or disable the keybinds.
+        hu = "X", -- Hands up key.
+        huk = "LSHIFT", -- Hands up on knees modifier. Ie you'd hold LSHIFT + X to get on your knees with your hands up
+        huh = "LCONTROL" -- Hands on head modifier. Ie you'd hold LCONTROL + X to put your hands on the back of your head.
+    },
+    enableCommands = true -- Enable the commands.
+}
+
+config.spikeStrips = {
+    enabled = true, -- Enable or disable the spike strips
+    maxCount = 5, -- Maximum spike strip size.
+    itemName = "spikestrip", -- spike strip item name.
+    target = {
+        enabled = true, -- Enable/disable target pickup
+        icon = "fas fa-road-spikes", -- Font awesome icon
+        distance = 2 -- Interaction distance
+    },
+    command = {
+        enabled = true, -- Enable/disable the commands to place/pickup the spikes
+        distance = 2.5 -- Distance to check to pickup a spike strip.
+    },
+    progressBar = {
+        type = 'circle', -- Progress type. "circle" | "bar"
+        duration = math.random(1000, 5000), -- The time to pickup / place. Supports numbers or math.random(minimum, maximum)
+        dict = "amb@prop_human_bum_bin@idle_b", -- Animation dict to play
+        clip = "idle_d" -- Animation clip to play.
+    },
+}
+
+config.armories = {
+    enabled = true, -- Should we enable the armory module?
+    useInventory = false, -- Should we use the ox_inventory armory (shops) module instead? If you use this, you will need to define the shops in the `data/shops.lua` file of ox_inventory.
+    enablePeds = true, -- Should we enable peds or just use target?
+    target = { -- Interact method via target. This is currently the only way to open the armory. We will be adding support for other methods in the future.
+        enabled = true, -- Enable or disable the target.
+        icon = "fas fa-gun", -- Font awesome icon
+        distance = 3, -- Interact distance
+        drawSprite = false -- Draw sprite, this is ignored if enablePeds = true.
+    }
+}
+
+config.cloakRooms = {
+    enabled = true, -- Should we enable cloak rooms?
+    icon = "fas fa-shirt", -- Icon to use across UI for the cloak rooms.
+    keybind = { 
+        enabled = true, -- Enable / disable the keybind interaction method.
+        key = 38, -- Interaction key. Default is E
+        radius = 5 -- The radius around the point to check for keybind press.
+    },
+    target = {
+        enabled = false, -- Enable the target interaction.
+        icon = "fas fa-shirt", -- Font awesome icon.
+        distance = 3, -- Distance to interact
+        drawSprite = false, -- Draw a sprite.
+    }
+}
+
+config.garages = {
+    enabled = true, -- Should we enable the garage system?
+    teleport = true, -- Should we teleport the player into the car?
+    returnEnabled = true, -- Should we allow players to return their vehicles.
+    target = { -- The target interaction method. This is currently the only way to interact with the garages, we will be adding support for other methods in the future.
+        enabled = true, -- Enable or disable the peds to interact with via target.
+        icon = "fas fa-warehouse", -- Font awesome icon
+        distance = 2 -- Interact distance
+    },
+    keybind = { -- Garage keybind. Players will return vehicles via this keybind
+        key = 38, -- Interaction key. Default is E
+        radius = 5 -- Radius around the point.
+    }
+}
+
+config.sinks = {
+    enabled = true, -- Allows players to wash evidence off of their hands. (Ie blood & GSR)
+    props = { -- The list of sink props. Please note the usage of backticks (`) and not (") or (')
+        `prop_bar_sink_01`,
+        `prop_ff_sink_02`,
+        `prop_sink_04`,
+        `v_res_mbsink`,
+        `prop_sink_06`,
+        `prop_sink_02`
+    },
+    progressBar = {
+        type = 'circle', -- Progress bar type. "circle" | "bar"
+        duration = math.random(5000, 10000), -- Progress bar duration in seconds. Supports a number or math.random(minimumTime, maximumTime)
+        animation = { -- Animation to play while washing hands.
+            dict = "missheist_agency3aig_23",
+            clip = "urinal_sink_loop"
+        }
+    },
+    target = {
+        icon = 'fas fa-hands-bubbles', -- Font awesome icon
+        distance = 2 -- Distance
+    }
+}
+
+config.tintMeter = {
+    enabled = true, -- Enable or disable the tint meter
+    UIEnabled = true, -- Enable or disable the tint meter UI
+    progressBar = {
+        type = 'circle', -- Progress bar type. "circle" | "bar"
+        duration = math.random(3000, 7000), -- Progress bar duration in seconds. Supports a number or math.random(minimumTime, maximumTime)
+        clip = 'cellphone_text_read_base', -- Animation clip to play while washing hands.
+        dict = 'cellphone@' -- Animation dict to play while washing hands.
+    },
+    target = {
+        enabled = true, -- Enable or disable the target system
+        icon = 'fas fa-car-side', -- Font awesome icon
+        distance = 2, -- Interact distance
+        bones = { 'door_dside_f', 'seat_dside_f', 'door_pside_f', 'seat_pside_f' } -- Vehicle bones where you can interact with. Can do bones = false to allow the entire vehicle.
+    },
+    commands = {
+        enabled = true, -- Enable or disable the commands
+        distance = 2 -- Distance to check nearby vehicles.
+    }
+}
+
+config.tackle = {
+    enabled = true, -- Should we enable the tackle system.
+    notify = true, -- Should we notify when someone tackles you?
+    ragdollDuration = 5000, -- Time in milliseconds that a player should ragdoll for after being tackled.
+    command = {
+        enabled = false, -- enable / disable the tackle command.
+        distance = 1.6 -- Distance to check for nearby player.
+    },
+    keybind = {
+        enabled = true, -- Should the keybind be enabled?
+        defaultKey = "G", -- Default Key. Ref: https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/
+        defaultMapper = 'KEYBOARD', -- Key Mapper ID. Ref: https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/
+        secondaryKey = nil, -- If you want to specify a controller keybind. Ref: https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/
+        secondaryMapper = nil, -- If you want to specify a controller keybind. Ref: https://docs.fivem.net/docs/game-references/input-mapper-parameter-ids/
+    },
+    target = {
+        enabled = true, -- Should we enable tackling via target?
+        icon = "fas fa-user-ninja", -- Target icon.
+        distance = 2.0 -- Target interact distance.
+    },
+    animation = {
+        timeout = 15000, -- timeout to load animation in ms
+        tacklerDict = "missmic2ig_11", -- anim dict that the tackler will play
+        tacklerClip = "mic_2_ig_11_intro_goon", -- anim clip that the tackler will play
+        tackleeDict = "missmic2ig_11", -- anim dict that the tacklee will play
+        tackleeClip = "mic_2_ig_11_intro_p_one", -- anim clip that the tacklee will play
+    }
+}
+
+config.objects = { -- Objects are specified in the `data/data_objects.lua` file.
+    enabled = true, -- Enable the object spawning system
+    useItems = false, -- Enable this to utilize items instead of a menu or commands.
+    progressBar = {
+        type = 'circle', -- Progress bar type. "circle" | "bar"
+        duration = 2500,  -- Progress bar duration in seconds. Supports a number or math.random(minimumTime, maximumTim
+        useWhileDead = false, -- block the ability to use while dead
+        canCancel = true, -- Can cancel the progress bar
+        disable = { -- Disable various inputs
+            car = true,
+            move = true,
+            combat = true,
+            mouse = false
+        },
+        anim = { -- Animation to play
+            dict = 'anim@narcotics@trash',
+            clip = 'drop_front'
+        }
+    },
+    target = {
+        enabled = true, -- Enable the target interaction to pickup objects.
+        icon = 'fas fa-boxes-stacked', -- Font awesome icon
+        distance = 2, -- Interact distance
+    },
+    commands = {
+        enabled = true, -- Enable the commands to spawn & delete objects, you can specify them in `data/data_objects.lua`
+        distance = 2 -- Distance to check for nearby objects.
+    }
+}
+
+config.menu = {
+    enabled = true, -- Enable or disable the radial menu.
+    icon = "fas fa-building-shield", -- Font awesome Icon
+    options = { -- Menu options.
+        {
+            id = 'panicButton', -- Unique ID for the option.
+            icon = 'bell', -- Font awesome icon name.
+            label = 'Panic Button', -- Label
+            event = 'TAM_Police:triggerPanicButton', -- The event to trigger
+        },
+        {
+            id = 'policeInteractions',
+            icon = 'list-check',
+            label = 'Police Interactions',
+            items = { -- Items for sub-menu
+                {
+                    id = 'escort',
+                    icon = 'user-group',
+                    label = 'Escort Player',
+                    event = 'TAM_Police:escortPlayer',
+                },
+                {
+                    id = 'search',
+                    icon = 'magnifying-glass',
+                    label = 'Search Player',
+                    event = 'TAM_Police:searchPlayer',
+                },
+                {
+                    id = 'jail',
+                    icon = 'user-lock',
+                    label = 'Jail Player',
+                    event = 'TAM_Police:sendToJail',
+                },
+            },
+        },
+        {
+            id = 'policeObjects',
+            icon = 'road',
+            label = 'Police Objects',
+            items = {
+                {
+                    id = 'cone', -- Unique ID
+                    icon = 'triangle-exclamation', -- Font awesome Icon
+                    label = 'Cone', -- Menu label
+                    event = 'TAM_Police:spawnObject', -- event to trigger
+                    args = 'Cone', -- Arguments to pass through the event. In this case, it is the object name.
+                },
+                {
+                    id = 'roadsign', -- Unique ID
+                    icon = 'sign-hanging', -- Font awesome Icon
+                    label = 'Road Sign', -- Menu label
+                    event = 'TAM_Police:spawnObject', -- event to trigger
+                    args = 'Roadsign', -- Arguments to pass through the event. In this case, it is the object name.
+                },
+                {
+                    id = 'barrier', -- Unique ID
+                    icon = 'torii-gate', -- Font awesome Icon
+                    label = 'Police Barrier', -- Menu label
+                    event = 'TAM_Police:spawnObject', -- event to trigger
+                    args = 'Police Barrier', -- Arguments to pass through the event. In this case, it is the object name.
+                },
+                {
+                    id = 'tent', -- Unique ID
+                    icon = 'campground', -- Font awesome Icon
+                    label = 'Tent', -- Menu label
+                    event = 'TAM_Police:spawnObject', -- event to trigger
+                    args = 'Tent', -- Arguments to pass through the event. In this case, it is the object name.
+                },
+                {
+                    id = 'whiteboard', -- Unique ID
+                    icon = 'chalkboard', -- Font awesome Icon
+                    label = 'Whiteboard', -- Menu label
+                    event = 'TAM_Police:spawnObject', -- event to trigger
+                    args = 'Whiteboard', -- Arguments to pass through the event. In this case, it is the object name.
+                },
+                {
+                    id = 'pinboard', -- Unique ID
+                    icon = 'thumbtack', -- Font awesome Icon
+                    label = 'Pinboard', -- Menu label
+                    event = 'TAM_Police:spawnObject', -- event to trigger
+                    args = 'Pinboard', -- Arguments to pass through the event. In this case, it is the object name.
+                },
+                {
+                    id = 'worklight', -- Unique ID
+                    icon = 'lightbulb', -- Font awesome Icon
+                    label = 'Worklight', -- Menu label
+                    event = 'TAM_Police:spawnObject', -- event to trigger
+                    args = 'Worklight', -- Arguments to pass through the event. In this case, it is the object name.
+                },
+                {
+                    id = 'worklight', -- Unique ID
+                    icon = 'lightbulb', -- Font awesome Icon
+                    label = 'Worklight', -- Menu label
+                    event = 'TAM_Police:spawnObject', -- event to trigger
+                    args = 'Worklight', -- Arguments to pass through the event. In this case, it is the object name.
+                },
+                {
+                    id = 'chair', -- Unique ID
+                    icon = 'chair', -- Font awesome Icon
+                    label = 'Chair', -- Menu label
+                    event = 'TAM_Police:spawnObject', -- event to trigger
+                    args = 'Chair', -- Arguments to pass through the event. In this case, it is the object name.
+                },
+                {
+                    id = 'deleteObject',
+                    icon = 'trash',
+                    label = 'Delete Object',
+                    event = 'police:client:deleteObject',
+                },
+            }
+        }
+    }
+}
+```
+
+## Evidence Configuration [#evidence-configuration]
+
+The evidence config file is found in `data/config_evidence.lua` and contains all of the configuration for evidence.
+
+```lua
+evidenceConfig.GSR = {
+    enabled = true, -- Enable or disable the GSR system.
+    validGloves = {}, -- Comma-sperated list of drawable variation ids for gloves.
+    clearTime = 2880, -- Time in seconds it takes for the GSR to clear.
+    clearWaterTime = 30, -- Time in seconds it takes for the GSR to clear off while in water.
+    enableSinks = true, -- Can a player wash their hands in a sink to clear the GSR?
+    target = {
+        enabled = true, -- Enable the target interaction to check a player for GSR
+        icon = "fas fa-gun", -- Font awesome icon
+        distance = 1.5, -- Interact Distance
+        items = false, -- set to nil if not using inventory. An item, array of items, or pairs of items-count required to show the option.
+        anyTime = true -- Only require a single item from the items table above to exist.    
+    },
+    progressBar = {
+        type = 'circle', -- Progress bar type. "cirlce" | "bar"
+        duration = math.random(3000, 7000), -- Time in seconds that the progress bar lasts. Supports a number or math.random(minTime, maxTime)
+        clip = 'cellphone_text_read_base', -- Animation clip
+        dict = 'cellphone@' -- Animation dict
+    },
+    command = {
+        enabled = true, -- Enable the command interaction to check a player for GSR
+        distance = 2 -- Distance to check for nearby players.
+    },
+    ignoredWeps = { -- Weapons that should be ignored for GSR. Please note the usage of backticks (`) and not (") or (')
+        `weapon_raypistol`,
+        `weapon_stungun_mp`,
+        `weapon_flaregun`,
+        `weapon_stungun`,
+        `weapon_raycarbine`,
+        `weapon_railgun`,
+        `weapon_railgunxm3`,
+        `weapon_rayminigun`,
+        `weapon_firework`,
+        `weapon_compactlauncher`,
+        `weapon_rpg`,
+        `weapon_grenadelauncher`,
+        `weapon_grenadelauncher_smoke`,
+        `weapon_grenade`,
+        `weapon_bzgas`,
+        `weapon_molotov`,
+        `weapon_stickybomb`,
+        `weapon_proxmine`,
+        `weapon_snowball`,
+        `weapon_pipebomb`,
+        `weapon_ball`,
+        `weapon_smokegrenade`,
+        `weapon_flare`,
+        `weapon_acidpackage`,
+        `weapon_petrolcan`,
+        `weapon_fireextinguisher`,
+        `weapon_hazardcan`,
+        `weapon_fertilizercan`,
+        `weapon_dagger`,
+        `weapon_bat`,
+        `weapon_bottle`,
+        `weapon_crowbar`,
+        `weapon_unarmed`,
+        `weapon_flashlight`,
+        `weapon_golfclub`,
+        `weapon_hammer`,
+        `weapon_hatchet`,
+        `weapon_knuckle`,
+        `weapon_knife`,
+        `weapon_machete`,
+        `weapon_switchblade`,
+        `weapon_nightstick`,
+        `weapon_wrench`,
+        `weapon_battleaxe`,
+        `weapon_poolcue`,
+        `weapon_stone_hatchet`,
+        `weapon_candycane`
+    }
+}
+
+evidenceConfig.BAC = {
+    enabled = true, -- Enable or disable the BAC System
+    UIEnabled = true, -- Enable or disable the UI.
+    UIDisplayTime = 5000, -- How long it should take for the UI to go away.
+    clearInterval = 720, -- How long until each point wears off.
+    clearPoint = 0.01, -- The amount to loose per interval above
+    itemName = "breathalyzer", -- The item name to use if using inventory.
+    autoDetect = true, -- Should we automatically detect & set BAC levels based off of emotes.
+    emotes = { -- These are emote names setup to automatically add BAC level when used. Setup default to rp-emotes
+        --["emoteName"] = level_to_add
+        ["party"] = 0.02,
+        ["whiskey"] = 0.03,
+        ["whiskeyb"] = 0.04,
+        ["whiskeyb2"] = 0.04,
+        ["whiskeyb3"] = 0.04,
+        ["beer"] = 0.02,
+        ["beer2"] = 0.02,
+        ["beer3"] = 0.02,
+        ["beer5"] = 0.02,
+        ["beerf"] = 0.02,
+        ["beerf2"] = 0.02,
+        ["beerf3"] = 0.02,
+        ["beerf4"] = 0.02,
+        ["beerf5"] = 0.02,
+        ["beercan"] = 0.02,
+        ["beercan2"] = 0.02,
+        ["beercan3"] = 0.02,
+        ["dancedrink"] = 0.03,
+        ["dancedrink2"] = 0.03,
+        ["dancedrink3"] = 0.03,
+        ["dancedrink4"] = 0.03,
+        ["dancedrink5"] = 0.03,
+        ["dancedrink6"] = 0.02,
+        ["dancedrink7"] = 0.02,
+        ["dancedrink8"] = 0.02,
+        ["dancedrink9"] = 0.02,
+        ["wine"] = 0.02,
+        ["wine2"] = 0.02,
+        ["wine3"] = 0.02
+    },
+    target = {
+        enabled = true, -- Enable the target interaction to breathalyze a player.
+        icon = "fas fa-beer-mug-empty", -- Font awesome icon
+        distance = 1.5, -- Interact Distance
+    },
+    command = {
+        enabled = true, -- Enable the command to breathalyze a player
+        distance = 2, -- The distance to check for nearby players
+    },
+    progressBar = {
+        type = 'circle', -- Progress bar type. "cirlce" | "bar"
+        duration = math.random(3000, 7000), -- Time in seconds that the progress bar lasts. Supports a number or math.random(minTime, maxTime)
+        clip = 'cellphone_text_read_base', -- Animation clip
+        dict = 'cellphone@' -- Animation dict
+    },
+}
+
+evidenceConfig.Casings = {
+    enabled = false, -- Enable the bullet casings. This requires the usage of an inventory
+    target = {
+        drawSprite = true, -- Draw sprites
+        icon = "fas fa-magnifying-glass" -- Font awesome icon.
+    },
+    ammoTypes = { -- The ammo types.
+        ['ammo-22'] = { -- Ammo ID
+            label = '.22 LR', -- Ammo label
+            weight = 1, -- The weight
+            projectile = 'projectile-ammo-22', -- Projectile name
+            casing = 'casing-ammo-22' -- Casing name
+        },
+        ['ammo-38'] = {
+            label = '.38 LC',
+            weight = 3,
+            projectile = 'projectile-ammo-38',
+            casing = 'casing-ammo-38'
+        },
+        ['ammo-44'] = {
+            label = '.44 Magnum',
+            weight = 3,
+            projectile = 'projectile-ammo-44',
+            casing = 'casing-ammo-44'
+        },
+        ['ammo-50'] = {
+            label = '.50 AE',
+            weight = 4,
+            projectile = 'projectile-ammo-50',
+            casing = 'casing-ammo-50'
+        },
+        ['ammo-heavysniper'] = {
+            label = '.50 BMG',
+            weight = 5,
+            projectile = 'projectile-ammo-heavysniper',
+            casing = 'casing-ammo-heavysniper'
+        },
+        ['ammo-musket'] = {
+            label = '.50 Ball',
+            weight = 3,
+            projectile = 'projectile-ammo-musket',
+            casing = false
+        },
+        ['ammo-rifle'] = {
+            label = '5.56x45mm',
+            weight = 2,
+            projectile = 'projectile-ammo-rifle',
+            casing = 'casing-ammo-rifle'
+        },
+        ['ammo-rifle2'] = {
+            label = '7.62x39mm',
+            weight = 2,
+            projectile = 'projectile-ammo-rifle2',
+            casing = 'casing-ammo-rifle2'
+        },
+        ['ammo-shotgun'] = {
+            label = '12 Gauge Buckshot',
+            weight = 4,
+            projectile = false,
+            casing = 'casing-ammo-shotgun'
+        },
+        ['ammo-sniper'] = {
+            label = '7.62x51mm',
+            weight = 4,
+            projectile = 'projectile-ammo-sniper',
+            casing = 'casing-ammo-sniper'
+        },
+        ['ammo-9'] = {
+            label = '9mm',
+            weight = 2,
+            projectile = 'projectile-ammo-9',
+            casing = 'casing-ammo-9'
+        },
+        ['ammo-45'] = {
+            label = '.45 ACP',
+            weight = 2,
+            projectile = 'projectile-ammo-45',
+            casing = 'casing-ammo-45'
+        },
+        ['ammo-380'] = {
+            label = '.380 ACP',
+            weight = 1,
+            projectile = 'projectile-ammo-380',
+            casing = 'casing-ammo-380'
+        },
+        ['ammo-41'] = {
+            label = '.41 Remington Magnum',
+            weight = 2,
+            projectile = 'projectile-ammo-41',
+            casing = 'casing-ammo-41'
+        },
+    }
+}
+```
+
+## Locker Room Configuration [#locker-room-configuration]
+
+The locker room configuration consists of two different files, the outfits located in `data/data_outfits.lua` and the configuration located in `data/config_outfits.lua`
+
+Configuration:
+
+```lua
+return {
+    {
+        id = 'stationId', -- A unique identifier.
+        label = "Locker Room", -- Label
+        coords = vec3(-443.928, 6007.664, 32.228), -- The coords to load the zone in at.
+        distance = 5, -- The distance around the zone
+        blip = {
+            enabled = false, -- Enable or disable blips
+            sprite = 73, -- Blip sprite
+            color = 12, -- Blip color
+            scale = 0.8, -- Blip scale
+            label = "Locker Room", -- Blip label
+            onlyNearby = true, -- Should we only display the blip when players are nearby.
+        },
+        options = { -- Locker options
+            {
+                name = 'Patrol Locker', -- The name of the locker
+                id = 'station_patrol_locker', -- A unique identifier to assign to the locker
+                description = 'View the Patrol Locker!', -- Description to assign to the option in the menu.
+                outfits = { -- The outfits to list under the locker.
+                    {
+                        name = "Patrol Class A", -- Outfit name
+                        image = false, -- Optionally an image to display on the menu.
+                        groups = false, -- Groups, can be false or a table of group = grade. Ie { police = 0, swat = 4 }
+                        clothing = outfits.patrol_outfit -- The outfit ID from `data/data_outfits.lua`
+                    },
+                    
+                }
+            }
+        }
+    },
+}
+```
+
+Outfits:
+
+You can quickly get your current outfit by running the command `/getclothing`, this will copy it to your clipboard so you can paste it here.
+
+```lua
+outfits.patrol_outfit = { -- The outfit ID. This is used when specifying the clothing option for outfits.
+    male = { -- Male clothes.
+        undershirt = { drawable = 262, texture = 1 },
+        mask = { drawable = 121, texture = 0 },
+        torso = { drawable = 86, texture = 0 },
+        torso2 = { drawable = 576, texture = 0 },
+        badge = { drawable = 0, texture = 0 },
+        bag = { drawable = 148, texture = 0 },
+        shoes = { drawable = 109, texture = 1 },
+        accessory = { drawable = 275, texture = 0 },
+        kevlar = { drawable = 105, texture = 0 },
+        leg = { drawable = 208, texture = 0 },
+        watch = { drawable = -1, texture = -1 },
+        hat = { drawable = -1, texture = -1 },
+        glasses = { drawable = -1, texture = -1 },
+        ears = { drawable = -1, texture = -1 },
+        bracelets = { drawable = -1, texture = -1 },
+    },
+    female = { -- Female clothes
+        undershirt = { drawable = 304, texture = 0 },
+        mask = { drawable = 0, texture = 0 },
+        torso = { drawable = 0, texture = 0 },
+        torso2 = { drawable = 617, texture = 0 },
+        badge = { drawable = 0, texture = 0 },
+        bag = { drawable = 116, texture = 0 },
+        shoes = { drawable = 163, texture = 0 },
+        accessory = { drawable = 208, texture = 0 },
+        kevlar = { drawable = 0, texture = 0 },
+        leg = { drawable = 222, texture = 0 },
+        watch = { drawable = -1, texture = -1 },
+        hat = { drawable = -1, texture = -1 },
+        glasses = { drawable = -1, texture = -1 },
+        ears = { drawable = -1, texture = -1 },
+        bracelets = { drawable = -1, texture = -1 },
+    }
+}
+
+-- If you want to add more options, just duplicate it and change the id. Ie:
+
+
+-- outfits.patrol_outfit2 = { -- The outfit ID. This is used when specifying the clothing option for outfits.
+--     male = { -- Male clothes.
+--         ...
+--     },
+--     female = { -- Female clothes
+--         ...
+--     }
+-- }
+
+-- If you want to only change certain clothing items, you can just omit the option from the clothing list or set it to -1. Ie:
+
+-- male = { -- Male clothes, this will only change the accessory.
+--     accessory = { drawable = 275, texture = 0 },
+-- },
+-- female = { -- Female clothes, this will only change the hat.
+--     undershirt = { drawable = -1, texture = 0 },
+--     mask = { drawable = -1, texture = 0 },
+--     torso = { drawable = -1, texture = 0 },
+--     torso2 = { drawable = -1, texture = 0 },
+--     badge = { drawable = -1, texture = 0 },
+--     bag = { drawable = -1, texture = 0 },
+--     shoes = { drawable = -1, texture = 0 },
+--     accessory = { drawable = -1, texture = 0 },
+--     kevlar = { drawable = -1, texture = 0 },
+--     leg = { drawable = -1, texture = 0 },
+--     watch = { drawable = -1, texture = -1 },
+--     hat = { drawable = 16, texture = 3 },
+--     glasses = { drawable = -1, texture = -1 },
+--     ears = { drawable = -1, texture = -1 },
+--     bracelets = { drawable = -1, texture = -1 },
+-- }
+```
+
+## Shotspotter Configuration [#shotspotter-configuration]
+
+The shotspotter configuration can be found in the `data/config_shotspotter.lua` file.
+
+```lua
+shotSpotterConfig.enabled = true -- Enable the shot spotter module
+
+shotSpotterConfig.debug = false -- Should we display zones on the map.
+
+shotSpotterConfig.cooldown = 5 -- Time in minutes until the shot spotter can be triggered again.
+
+shotSpotterConfig.alertDelay = 10 -- Time in seconds until the shot spotter sends the alert
+
+shotSpotterConfig.radius = 500 -- Radius around each shot spotter.
+
+shotSpotterConfig.jobCheck = false -- Should we check for jobs.
+
+shotSpotterConfig.ignoredJobs = { -- Jobs to ignore.
+    "police"
+}
+
+shotSpotterConfig.blips = {
+    enabled = true,
+    sprite = 313,
+    color = 1,
+    scale = 0.8,
+    label = "Shotspotter",
+}
+
+shotSpotterConfig.locations = {
+    vec3(653.42, -648.74, 57.18), -- Los Santos Fwy
+    vec3(1015.98, -255.25, 85.58), -- Glory Way
+    vec3(329.99, 288.96, 120.10), -- Clinton Ave
+    vec3(-202.76, -327.34, 66.04), -- Las Lagunas Blvd
+    vec3(31.32, -875.29, 31.46), -- Power St
+    vec3(70.1372, -1718.3291, 34.2056), -- Carson Ave
+    vec3(1196.9178, -1624.6641, 50.3403), -- Fudge Ln
+    vec3(-852.9095, -1215.8782, 9.2463), -- Palimino Ave
+    vec3(-932.7648, -448.8844, 42.9436), -- Movie Star Way
+    vec3(-1713.6848, 478.4267, 130.3795), -- Ace Jones Dr
+    vec3(-596.5602, 515.0753, 109.675), -- Picture Perfect Dr
+    vec3(716.6274, -1958.7434, 44.7564), -- Popular St
+    vec3(-1889.92, -351.62, 49.31), -- Playa Vista
+    vec3(-978.85, -2089.64, 10.19), -- Greenwich Parkway
+    vec3(-1169.81, -2763.41, 13.95), -- Runway 1
+    -- vec3(-96.09, 6377.95, 31.48), -- Paleto Blvd
+    -- vec3(1415.54, 2695.04, 37.42), -- Route 68
+    -- vec3(-3069.58, 735.29, 21.70), -- Great Ocean Hwy
+    -- vec3(-2729.48, 3.24, 15.51), -- Great Ocean Hwy
+    vec3(74.06, -2644.79, 21.90), -- Elysian Fields Fwy
+    vec3(984.14, -3117.20, 5.90), -- Buccaneer Way
+    vec3(236.19, 1240.05, 229.83), -- Baytree Canyon Road
+    -- vec3(1806.03, 3705.84, 33.96), -- Zancudo Ave
+    -- vec3(1702.34, 4881.44, 42.03), -- Grapeseed Main St
+    -- vec3(2868.15, 3567.91, 53.38), -- Senora Fwy
+    -- vec3(2566.92, 383.00, 108.46),-- Palimino Fwy
+    vec3(1358.59, -942.04, 69.29), -- Palimino Fwy
+    vec3(-1591.69, -1140.81, 2.15), -- Red Desert Ave
+    -- vec3(-2380.90, 2136.90, 88.54),-- Tongva Hills
+    -- vec3(375.02, 2778.28, 55.97) -- Route 68 / Joshua
+}
+
+shotSpotterConfig.ignoredWeps = {
+    `weapon_raypistol`,
+    `weapon_stungun_mp`,
+    `weapon_flaregun`,
+    `weapon_stungun`,
+    `weapon_raycarbine`,
+    `weapon_railgun`,
+    `weapon_railgunxm3`,
+    `weapon_rayminigun`,
+    `weapon_firework`,
+    `weapon_compactlauncher`,
+    `weapon_rpg`,
+    `weapon_grenadelauncher`,
+    `weapon_grenadelauncher_smoke`,
+    `weapon_grenade`,
+    `weapon_bzgas`,
+    `weapon_molotov`,
+    `weapon_stickybomb`,
+    `weapon_proxmine`,
+    `weapon_snowball`,
+    `weapon_pipebomb`,
+    `weapon_ball`,
+    `weapon_smokegrenade`,
+    `weapon_flare`,
+    `weapon_acidpackage`,
+    `weapon_petrolcan`,
+    `weapon_fireextinguisher`,
+    `weapon_hazardcan`,
+    `weapon_fertilizercan`,
+    `weapon_dagger`,
+    `weapon_bat`,
+    `weapon_bottle`,
+    `weapon_crowbar`,
+    `weapon_unarmed`,
+    `weapon_flashlight`,
+    `weapon_golfclub`,
+    `weapon_hammer`,
+    `weapon_hatchet`,
+    `weapon_knuckle`,
+    `weapon_knife`,
+    `weapon_machete`,
+    `weapon_switchblade`,
+    `weapon_nightstick`,
+    `weapon_wrench`,
+    `weapon_battleaxe`,
+    `weapon_poolcue`,
+    `weapon_stone_hatchet`,
+    `weapon_candycane`
+}
+
+shotSpotterConfig.suppressors = {
+    `COMPONENT_AT_PI_SUPP_02`, -- Pistol, Pistol Mk2, SNS Pistol Mk2.
+    `COMPONENT_AT_PI_SUPP`, -- Combat Pistol, AP Pistol, Heavy Pistol, Vintage Pistol, SMG, SMG Mk2, Machine Pistol.
+    `COMPONENT_AT_AR_SUPP_02`, -- .50 Pistol, Micro SMG, Assault SMG, Bullpup Shotgun, Heavy Shotgun, Assault Rifle, Special Carbine, Special Carbine Mk2, Assault Rifle Mk2, Sniper Rifle.
+    `COMPONENT_AT_AR_SUPP`, -- Assault Shotgun, Combat Shotgun, Carbine Rifle, Advanced Rifle, Bullpup Rifle, Bullpup Rifle Mk2, Carbine Rifle Mk2, Military Rifle, Marksman Rifle Mk2, Marksman Rifle.
+    `COMPONENT_AT_SR_SUPP` -- Pump Shotgun.
+}
+```
+
+## Armory Configuration [#armory-configuration]
+
+The armory config file can be found in `data/data_armories.lua`. You can quickly get your current loadout by running `/getloadout`, this will copy the information to your clipboard to paste into the file.
+
+<Callout type="warning">
+  In order for addon weapons to work with the `/getloadout` command, you need to add them to `data/data_weapons.lua` and their components if they have any to `data/data_components.lua`
+</Callout>
+
+```lua
+return {
+    {
+        shopType = "PoliceArmory", -- Ox inventory shop type if you're using their shop functions.
+        id = 1, -- Ox inventory shop ID if you're using their shop functions.
+        coords = vec3(361.171, -1601.652, 29.307), -- Armory coords
+        distance = 100, -- Distance to load in at.
+        ped = { -- Ped configuration
+            model = `S_M_M_AmmuCountry`, -- Ped model
+            scenario = "WORLD_HUMAN_CLIPBOARD", -- Ped scenario. Also supports animations.
+            coords = vec3(361.171, -1601.652, 29.307), -- Ped coords
+            heading = 231.808, -- Ped heading
+        },
+        blip = { -- Blip configuration
+            enabled = false, -- Enable or disable the blips for armories
+            sprite = 110, -- Blip sprite
+            color = 12, -- Blip color
+            scale = 0.8, -- Blip scale
+            label = "Armory", -- Blip Label
+            onlyNearby = true, -- Should we only display the blip when nearby.
+        },
+        loadouts = { -- Loadout options
+            {
+                id = "pd_patrol_loadout", -- Unique ID for the loadoout option
+                name = 'Patrol Loadout', -- Loadout name
+                optionLabel = "View Patrol Loadout", -- Loadout option Label
+                optionDescription = 'View the Patrol weapon loadout!', -- Loadout option description
+                weapons = { -- Loadout weapons
+                    -- { name = "Weapon Name", weapon = `weapon hash`, ammo = ammoAmount, components = { `comma`, `seperated`, `list`, `of`, `component`, `hashes`}, tint = tintNumber },
+                    { name = "Flashlight", weapon = -1951375401, ammo = 100, components = { }, tint = 0 },
+                    { name = "Combat Pistol", weapon = 1593441988, ammo = 100, components = { 119648377, 899381934 }, tint = 0 },
+                    { name = "Stungun", weapon = 911657153, ammo = 100, components = { }, tint = 0 },
+                    { name = "Pump Shotgun", weapon = 487013001, ammo = 100, components = { 2076495324 }, tint = 0 },
+                    { name = "Carbine MkII", weapon = -86904375, ammo = 100, components = { 1283078430, -1654288262, 2076495324 }, tint = 0 },
+                    { name = "Road Flares", weapon = 1233104067, ammo = 100, components = { }, tint = 0 },
+                    { name = "Jerry Can", weapon = 883325847, ammo = 100, components = { }, tint = 0 },
+                    { name = "Fire Extinguisher", weapon = 101631238, ammo = 100, components = { }, tint = 0 },
+                }
+            },
+
+            -- To add more options, just copy the table like this:
+
+            -- {
+            --     id = "pd_patrol_loadout2", -- Unique ID for the loadoout option
+            --     name = 'Patrol Loadout', -- Loadout name
+            --     optionLabel = "View Patrol Loadout", -- Loadout option Label
+            --     optionDescription = 'View the Patrol weapon loadout!', -- Loadout option description
+            --     weapons = { -- Loadout weapons
+            --         -- { name = "Weapon Name", weapon = `weapon hash`, ammo = ammoAmount, components = { `comma`, `seperated`, `list`, `of`, `component`, `hashes`}, tint = tintNumber },
+            --         { name = "Flashlight", weapon = -1951375401, ammo = 100, components = { }, tint = 0 },
+            --         { name = "Combat Pistol", weapon = 1593441988, ammo = 100, components = { 119648377, 899381934 }, tint = 0 },
+            --     }
+            -- },
+        }
+    },
+
+    -- To add more armories, just copy the above table like this:
+
+    -- {
+    --     shopType = "PoliceArmory", -- Ox inventory shop type if you're using their shop functions.
+    --     id = 1, -- Ox inventory shop ID if you're using their shop functions.
+    --     coords = vec3(361.171, -1601.652, 29.307), -- Armory coords
+    --     distance = 100, -- Distance to load in at.
+    --     ped = { -- Ped configuration
+    --         model = `S_M_M_AmmuCountry`, -- Ped model
+    --         scenario = "WORLD_HUMAN_CLIPBOARD", -- Ped scenario. Also supports animations.
+    --         coords = vec3(361.171, -1601.652, 29.307), -- Ped coords
+    --         heading = 231.808, -- Ped heading
+    --     },
+    --     blip = { -- Blip configuration
+    --         enabled = false, -- Enable or disable the blips for armories
+    --         sprite = 110, -- Blip sprite
+    --         color = 12, -- Blip color
+    --         scale = 0.8, -- Blip scale
+    --         label = "Armory", -- Blip Label
+    --         onlyNearby = true, -- Should we only display the blip when nearby.
+    --     },
+    --     loadouts = { -- Loadout options
+    --         {
+    --             id = "pd_patrol_loadout", -- Unique ID for the loadoout option
+    --             name = 'Patrol Loadout', -- Loadout name
+    --             optionLabel = "View Patrol Loadout", -- Loadout option Label
+    --             optionDescription = 'View the Patrol weapon loadout!', -- Loadout option description
+    --             weapons = { -- Loadout weapons
+    --                 -- { name = "Weapon Name", weapon = `weapon hash`, ammo = ammoAmount, components = { `comma`, `seperated`, `list`, `of`, `component`, `hashes`}, tint = tintNumber },
+    --                 { name = "Flashlight", weapon = -1951375401, ammo = 100, components = { }, tint = 0 },
+    --                 { name = "Combat Pistol", weapon = 1593441988, ammo = 100, components = { 119648377, 899381934 }, tint = 0 },
+    --                 { name = "Stungun", weapon = 911657153, ammo = 100, components = { }, tint = 0 },
+    --                 { name = "Pump Shotgun", weapon = 487013001, ammo = 100, components = { 2076495324 }, tint = 0 },
+    --                 { name = "Carbine MkII", weapon = -86904375, ammo = 100, components = { 1283078430, -1654288262, 2076495324 }, tint = 0 },
+    --                 { name = "Road Flares", weapon = 1233104067, ammo = 100, components = { }, tint = 0 },
+    --                 { name = "Jerry Can", weapon = 883325847, ammo = 100, components = { }, tint = 0 },
+    --                 { name = "Fire Extinguisher", weapon = 101631238, ammo = 100, components = { }, tint = 0 },
+    --             }
+    --         },
+
+    --         -- To add more options, just copy the table like this:
+
+    --         -- {
+    --         --     id = "pd_patrol_loadout2", -- Unique ID for the loadoout option
+    --         --     name = 'Patrol Loadout', -- Loadout name
+    --         --     optionLabel = "View Patrol Loadout", -- Loadout option Label
+    --         --     optionDescription = 'View the Patrol weapon loadout!', -- Loadout option description
+    --         --     weapons = { -- Loadout weapons
+    --         --         -- { name = "Weapon Name", weapon = `weapon hash`, ammo = ammoAmount, components = { `comma`, `seperated`, `list`, `of`, `component`, `hashes`}, tint = tintNumber },
+    --         --         { name = "Flashlight", weapon = -1951375401, ammo = 100, components = { }, tint = 0 },
+    --         --         { name = "Combat Pistol", weapon = 1593441988, ammo = 100, components = { 119648377, 899381934 }, tint = 0 },
+    --         --     }
+    --         -- },
+    --     }
+    -- },
+}
+```
+
+## Object Configuration [#object-configuration]
+
+The object list configuration file can be found in `data/data_objects.lua`.
+
+```lua
+return {
+    -- ["Object Name"] = { -- The name in the menu
+    --     command = "command_name_to_spawn_object", -- Command to spawn object
+    --     model = `object_model_name`, -- Object model to spawn
+    --     freeze = true, -- Should an object be frozen?
+    --    vehicleShouldAvoid = false, -- Should AI traffic try and reroute around the objects?
+    -- },
+
+    ["Police Barrier"] = { -- The name in the menu
+        command = "barrier", -- Command to spawn object
+        model = `prop_barrier_work05`, -- Object model to spawn
+        freeze = false, -- Should an object be frozen?
+        vehicleShouldAvoid = true, -- Should AI traffic try and reroute around the objects?
+    },
+    ["Roadsign"] = { -- The name in the menu
+        command = "roadsign", -- Command to spawn object
+        model = `prop_snow_sign_road_06g`, -- Object model to spawn
+        freeze = false, -- Should an object be frozen?
+        vehicleShouldAvoid = true, -- Should AI traffic try and reroute around the objects?
+    },
+    ["Cone"] = { -- The name in the menu
+        command = "cone", -- Command to spawn object
+        model = `prop_roadcone02a`, -- Object model to spawn
+        freeze = false, -- Should an object be frozen?
+        vehicleShouldAvoid = true, -- Should AI traffic try and reroute around the objects?
+    },
+    ["Tent"] = { -- The name in the menu
+        command = "tent", -- Command to spawn object
+        model = `prop_gazebo_03`, -- Object model to spawn
+        freeze = true, -- Should an object be frozen?
+        vehicleShouldAvoid = false, -- Should AI traffic try and reroute around the objects?
+    },
+    ["Whiteboard"] = { -- The name in the menu
+        command = "whiteboard", -- Command to spawn object
+        model = `prop_w_board_blank`, -- Object model to spawn
+        freeze = true, -- Should an object be frozen?
+        vehicleShouldAvoid = false, -- Should AI traffic try and reroute around the objects?
+    },
+    ["Pinboard"] = { -- The name in the menu
+        command = "pinboard", -- Command to spawn object
+        model = `vw_prop_vw_board_01a`, -- Object model to spawn
+        freeze = true, -- Should an object be frozen?
+        vehicleShouldAvoid = false, -- Should AI traffic try and reroute around the objects?
+    },
+    ["Worklight"] = { -- The name in the menu
+        command = "worklight", -- Command to spawn object
+        model = `prop_worklight_03b`, -- Object model to spawn
+        freeze = true, -- Should an object be frozen?
+        vehicleShouldAvoid = false, -- Should AI traffic try and reroute around the objects?
+    },
+    ["Chair"] = { -- The name in the menu
+        command = "chair", -- Command to spawn object
+        model = `prop_chair_08`, -- Object model to spawn
+        freeze = true, -- Should an object be frozen?
+        vehicleShouldAvoid = false, -- Should AI traffic try and reroute around the objects?
+    },
+}
+```
+
+## Ped Configuration [#ped-configuration]
+
+The ped configuration file can be found in `data/data_peds.lua` and includes all of the duty peds or alert peds.
+
+```lua
+return {
+    {
+        type = "alert", -- The type of ped: "alert" | "duty"
+        coords = vec3(-1403.4, -560.99, 30.19), -- Spawn coordinates of the ped
+        distance = 100, -- The distance at which to load the ped in.
+        ped = {
+            model = `S_M_Y_XMech_01`, -- Ped model to spawn. Please note the usage of backticks (`) and not (") or (')
+            scenario = "WORLD_HUMAN_CLIPBOARD", -- Scenario to play on the ped.
+            -- anim = { -- You can also specify an animation instead of scenario.
+            --     clip = "animation_clip",
+            --     dict = "animation_dict"
+            -- }
+        },
+        blip = {
+            enabled = false, -- Enable or disable the blip.
+            sprite = 357, -- Blip Sprite
+            color = 3, -- Blip Color
+            scale = 0.8, -- Blip Scale
+            label = "Front Desk Ped", -- Blip Label
+            onlyNearby = false, -- Should we only display the blip when a player is within the distance specified above?
+        },
+    },
+    {
+        type = "duty",
+        coords = vec3(-1403.4, -556.99, 30.19),
+        distance = 100,
+        ped = {
+            model = `S_M_Y_XMech_01`,
+            scenario = "WORLD_HUMAN_CLIPBOARD",
+        },
+        blip = {
+            enabled = false,
+            sprite = 357,
+            color = 3,
+            scale = 0.8,
+            label = "Go On Duty",
+            onlyNearby = false,
+        },
+    }
+}
+```
+
+## Garage Configuration [#garage-configuration]
+
+The garage configuration file can be found in `data/data_garages.lua` and includes all of the garages & their vehicles.
+
+You can copy your current vehicles information to your clipboard to paste it in this file via the command `/getvehprops`
+
+```lua
+    {
+        coords = vec3(-485.026, 5982.255, 31.423), -- Coords for the zone,
+        distance = 50, -- Zone load distance,
+        ped = { -- Ped configuration
+            model = `S_M_Y_XMech_01`, -- Ped model
+            scenario = "WORLD_HUMAN_CLIPBOARD", -- Ped scenario
+            coords = vec3(-485.026, 5982.255, 31.423), -- Ped coords
+            heading = 280.14, -- Ped heading
+            -- anim = { -- You can also specify an animation instead of scenario.
+            --     clip = "animation_clip",
+            --     dict = "animation_dict"
+            -- }
+        },
+        returnConfig = { -- Return position
+            coords = vec3(-466.614, 5971.854, 31.423), -- Return coords
+            radius = 4 -- Radius around the coords.
+        },
+        blip = { -- Blip
+            enabled = false,
+            sprite = 357,
+            color = 3,
+            scale = 0.8,
+            label = "Vehicle Garage",
+            onlyNearby = false,
+        },
+        garages = { -- Garages available at this location
+            {
+                name = 'Patrol Fleet', -- Garage name
+                id = "paleto_patrol", -- Unique ID for the garage.
+                optionLabel = "View Patrol Fleet", -- Garage option label
+                optionDescription = 'View the Patrol vehicle fleet!', -- Garage option description
+                vehicles = { -- Vehicles available at this garage
+                    {
+                        name = "Vehicle Name",
+                        model = `spawncode`,
+                        spawnCoords = vec3(-482.089569, 5983.217285, 31.123310), -- Coords to spawn the vehicle at,
+                        heading = 225, -- Heading for the vehicle.
+                        groups = { -- group & minimum grade required to have this vehicle.
+                            police = 4
+                        },
+                        vehProps = {...} -- Vehicle Props
+                    }
+                }
+            }
+        }
+    },
+```
+
+## Bridge & Integration Configuration [#bridge--integration-configuration]
+
+All of the framework and resource integrations can be found in the `bridge` directory, we expect you to have atleast a basic understanding of Lua & how to integrate with other resources to edit these. Minimal support will be provided. If you have anything you want to recommend we integrate with, please let us know and we'll try our best to add it!
+
+## Locals / Language [#locals--language]
+
+All of the respective language/locales & command names can be changed in the `locales` directory.
+
+Users can set their language via the `/ox_lib` command in-game if its enabled. If the language file doesn't exist, it defaults to English.
+
+
+# Developers (/docs/paid/police/developers)
+
+
+
+# Complete Police System - Developer Documentation [#complete-police-system---developer-documentation]
+
+Here you will find a basic list of how you can modify our resource if you are a developer. This assumes you have *at minimum* basic knowledge of how FiveM programming works and the lua scripting language.
+
+If you have any exports or events you need, please join our [Discord](https://discord.gg/YzC4Du7WY) and let us know.
+
+## Events [#events]
+
+#### `searchPlayer` [#searchplayer]
+
+Triggered to search a nearby player.
+
+```lua
+TriggerEvent("TAM_Police:searchPlayer")
+
+-- or --
+
+TriggerClientEvent("TAM_Police:searchPlayer", sourcePlayerId)
+```
+
+#### `escortPlayer` [#escortplayer]
+
+Triggered to escort a nearby player.
+
+```lua
+TriggerEvent("TAM_Police:escortPlayer")
+
+-- or --
+
+TriggerClientEvent("TAM_Police:escortPlayer", sourcePlayerId)
+```
+
+#### `spawnObject(item)` [#spawnobjectitem]
+
+Spawn an object from the object list.
+`item` string name from `data/data_objects.lua`
+
+```lua
+TriggerEvent("TAM_Police:spawnObject", "Police Barrier")
+
+-- or --
+
+TriggerClientEvent("TAM_Police:spawnObject", sourcePlayerId, "Police Barrier")
+```
+
+#### `deleteObject()` [#deleteobject]
+
+Delete a nearby police object.
+
+```lua
+TriggerEvent("TAM_Police:deleteObject")
+
+-- or --
+
+TriggerClientEvent("TAM_Police:deleteObject", sourcePlayerId)
+```
+
+## Exports [#exports]
+
+### Client [#client]
+
+#### `isPedCuffed(playerPedId)` [#ispedcuffedplayerpedid]
+
+Returns a boolean on wether the ped is cuffed or not.
+
+```lua
+local ped = PlayerPedId()
+local cuffed = exports.TAM_Police:isPedCuffed(ped)
+```
+
+#### `uncuff()` [#uncuff]
+
+Uncuffs a nearby ped.
+
+```lua
+exports.TAM_Police:uncuff()
+```
+
+#### `cuff()` [#cuff]
+
+Cuffs a nearby ped.
+
+```lua
+exports.TAM_Police:uncuff()
+```
+
+#### `unziptie()` [#unziptie]
+
+Unzipties a nearby ped.
+
+```lua
+exports.TAM_Police:unziptie()
+```
+
+#### `ziptie()` [#ziptie]
+
+Zipties a nearby ped.
+
+```lua
+exports.TAM_Police:ziptie()
+```
+
+#### `resetHandsUp(playerPedId)` [#resethandsupplayerpedid]
+
+Resets the hands up status of the specified ped.
+
+```lua
+local ped = PlayerPedId()
+exports.TAM_Police:resetHandsUp(ped)
+```
+
+## Configuring your own integrations [#configuring-your-own-integrations]
+
+All of the bridge files are located in `bridge` directory. This requires decent knowledge of the lua scripting language and how FiveM works. This is mostly unsupported.
+
+
+# Complete Police System (/docs/paid/police)
+
+
+
+
+
+<ResourceBtns resource="complete-police-system" />
+
+SCFD Police System is a fully modular, performance-optimized law enforcement framework for FiveM, designed to provide immersive policing mechanics while remaining flexible for any server style.
+
+Built from the ground up with scalability and compatibility in mind, the system supports multiple departments, realistic investigation tools, AI-assisted utilities, and configurable policing workflows - all structured to work seamlessly together or independently.
+
+Every feature is designed to integrate cleanly into existing server ecosystems without restriction, allowing servers to keep their preferred systems while upgrading others.
+
+Feedback and feature ideas have been contributed by individuals who currently work, or have previously worked, in real-world law enforcement roles, helping shape systems that feel authentic, practical, and immersive for serious RP environments.
+
+## Key Features: [#key-features]
+
+* 🎥 Security Camera System: Monitor configurable camera networks across your server.
+* 🚓 Police Vehicle Garage: Department-managed fleet system with vehicle tracking and return logic.
+* 🔫 Advanced Police Armory: Configurable weapon and equipment distribution system.
+* 👕 Locker & Clothing Rooms: Department-specific uniforms and locker functionality.
+* 🎯 Police Actions Menu: Supports both radial and standard interaction menus.
+* 🔗 Cuffing & Zipties: Multiple restraint types with animations and configurable behavior.
+* 🔊 ShotSpotter Integration: Automatically detect and report nearby gunfire activity.
+* 🙌 Hands Up System: Player surrender mechanic with animation support.
+* 🕶️ Tint Meter Tool: Measure and enforce vehicle window tint limits.
+* 🧬 Fingerprint Reader: Capture and analyze fingerprint evidence from suspects and scenes.
+* 🚧 Placeable Police Objects: Deploy cones, barriers, spike strips and more.
+* 📹 Live Body Cameras: Real-time officer bodycam functionality.
+* 🧪 Evidence System: Collect and analyze casings, blood samples, GSR, BAC and fingerprints.
+* 📍 Duty Blips: Identify active officers on the map based on department duty status.
+* 🔍 Frisking & Searching: Immersive search mechanics with animations.
+* ⛓️ Jailing Integrations: Compatible with existing jail resources.
+* 🏢 Multi-Department Support: Configure multiple agencies with independent permissions and equipment.
+* 🗄️ Department Facilities: Personal lockers and boss management menus.
+* 📸 ALPR Integration: Automatically detect and flag vehicle license plates.
+* 🚚 AI Tow Service: Request AI tow trucks with impound functionality.
+* 🐕 K9 Unit System: Deploy police dogs for searches and suspect tracking.
+* 🚨 Panic Button: Emergency distress alert system for officers.
+* 🤼 Tackle Mechanic: Physically stop fleeing suspects.
+* 💸 Fines System: Issue configurable monetary penalties.
+* 🚦 Opticom Integration: Automatically control traffic lights during emergency response.
+
+## Modular Design [#modular-design]
+
+Each component is designed as an independent module, allowing servers to enable or disable features as needed without impacting performance or compatibility.
+
+The system architecture prioritizes:
+
+* Performance optimization
+* Clean framework abstraction
+* Config-driven behavior
+* Expandability for future features
+* Compatibility with existing server ecosystems
+
+## Integration & Customization [#integration--customization]
+
+* Compatible with all major frameworks (QB, Qbox, ND, ESX) or works standalone.
+* Supports any\* inventory, target system, notifications, progressbars & skillchecks.
+* Bridge system included with hooks for custom integrations and extensions.
+* Fully configurable data structure allowing extensive customization.
+* Localization support for any language using ox\_lib locales.
+
+-# \* *Includes various integrations out of the box, with the ability to add your own via expansive hooks and bridge. Please see the documentation for all included*
+
+## Documentation & Support [#documentation--support]
+
+* [Docs](https://docs.scuffedlabs.com)
+* [Support Discord](https://scuffedlabs.com/discord)
+* [Website](https://scuffedlabs.com)
+
+## Credits [#credits]
+
+* Main design, programming, and testing by Scuffed Labs.
+* Feature feedback and workflow insight provided by individuals with real-world law enforcement experience.
+* Additional feedback and testing by Scorpion, NovaMonkey, and other community members.
+
+
+# Installation (/docs/paid/police/installation)
+
+
+
+
+
+# Complete Police System - Installation [#complete-police-system---installation]
+
+This will go over the installation guide for TAM\_Police. Please be sure to read this carefully and if you have any questions, feel free to ask in our Discord.
+
+<Steps>
+  <Step>
+    ### Install & setup all dependencies [#install--setup-all-dependencies]
+
+    * [ox\_lib](https://github.com/communityox/ox_lib/releases/latest)
+    * Make sure your server artifacts version is `12000` or above. Downloaded the [Windows](https://runtime.fivem.net/artifacts/fivem/build_server_windows/master/) or [Linux](https://runtime.fivem.net/artifacts/fivem/build_proot_linux/master/) artifacts.
+    * Make sure your game build is set to 2802 or higher. See how to set your gamebuild [here](https://forum.cfx.re/t/tutorial-forcing-gamebuilds-on-fivem/4784977).
+    * Make sure your server is running OneSync (Formally Onesync Infinity) and **not** legacy. See how to enable onesync [here](https://forum.cfx.re/t/onesync-infinity-how-to-use-it/996612).
+  </Step>
+
+  <Step>
+    ### Install optional dependencies [#install-optional-dependencies]
+
+    * [ox\_target](https://github.com/communityox/ox_target/releases/latest) **This is optional, however some features will not work without it**
+    * [ox\_inventory](https://github.com/communityox/ox_inventory/releases/latest) **This is optional, however some features will not work without it**
+  </Step>
+
+  <Step>
+    ### Download the latest release from [CFX Portal](https://portal.cfx.re) [#download-the-latest-release-from-cfx-portal]
+  </Step>
+
+  <Step>
+    ### (Required if using inventory) Add the items & images. [#required-if-using-inventory-add-the-items--images]
+
+    Add the items from `_INSTALL/items/items.lua` to your `ox_inventory/data/items.lua` & the images from `_INSTALL/items/images` to the `ox_inventory/web/images` directory.
+  </Step>
+
+  <Step>
+    ### Add the resources to your server.cfg (or resources.cfg) [#add-the-resources-to-your-servercfg-or-resourcescfg]
+  </Step>
+
+  <Step>
+    ```bash
+    start ox_lib
+    start framework # the name of your framework (i.e. ND_Core, es_extended, qbx_core). This is not necessary if you are using standalone.
+    start ox_target # Optional
+    start ox_inventory # Optional
+    start TAM_Police
+    ```
+  </Step>
+</Steps>
+
+## [Configuration](../police/configuration) [#configuration]
+
+## [Developer Docs](../police/developers) [#developer-docs]
+
+## [Troubleshooting](../police/troubleshooting) [#troubleshooting]
+
+
+# Troubleshooting (/docs/paid/police/troubleshooting)
+
+
+
+# Complete Police System - Troubleshooting [#complete-police-system---troubleshooting]
+
+Here's a list basic troubleshooting steps for TAM\_Police.
+
+## OX Lib related problems [#ox-lib-related-problems]
+
+* `ox_lib is missing, please ensure you have the latest version installed! \n https://github.com/communityox/ox_lib/releases/latest`
+  * This means you don't have ox\_lib installed. Please install the latest release from [here](https://github.com/communityox/ox_lib/releases/latest)
+* ox\_lib is outdated! Please ensure you upgrade to the latest version! \n [https://github.com/communityox/ox\_lib/releases/latest](https://github.com/communityox/ox_lib/releases/latest)
+  * This means that your ox\_lib version is out of date. Please update it from [here](https://github.com/communityox/ox_lib/releases/latest)
+
+## Resource Startup Errors [#resource-startup-errors]
+
+* Resource must be named TAM\_Police to function properly! Aborting loadup.
+  * You have renamed the resource. Please ensure that the resource name is exactly `TAM_Police` or else it wont work. This is cAsE sEnSiTiVe
+* Error loading fxmanifest! Aborting loadup.
+  * You have modified the fxmanifest.lua file and removed certain required fields. Please download the latest release from the [CFX Portal](https://portal.cfx.re) and replace the fxmanifest.lua file.
+* Error loading Configuration. Please be sure that the config file exists and there aren't any syntax errors! Aborting loadup.
+  * You messed up the `data/configuration.lua` file. This is usually related to a syntax error. Double check the file for any syntax errors or other mistakes.
+* Error loading locales directory. Please be sure the en.json file exists! Aborting loadup.
+  * The file `locales/en.json` is missing! This is required. If you wish to add more languages, please read [this](https://communityox.dev/ox_lib/Modules/Locale/Shared).
+* Error loading UI! UI Not built! Aborting Loadup.
+  * The UI hasn't been built or has been modified in some way. Please download the latest release from the [CFX Portal](https://portal.cfx.re) and replace the `web` directory.
+* Error loading bridge module. Missing standalone bridge! Aborting loadup.
+  * The bridge module has been messed up or is missing. Please download the latest release from the [CFX Portal](https://portal.cfx.re) and replace the `modules/bridge` directory.
+* Error loading audio. AWC File not found! Aborting loadup.
+  * The custom sound effects were unable to load. Please download the latest release from the [CFX Portal](https://portal.cfx.re) and replace the `audiodata` and `audiodirectory` directories.
+* Missing dependency \<insert dependency here>
+  * You are missing the respective dependency. Please read [this](../police/installation.mdx#install--setup-all-dependencies)
+
+## X feature isn't working! [#x-feature-isnt-working]
+
+Please be sure that you haven't disabled the feature entirely, some features are also dependent on a target or inventory system.
+
+
+# Postal Job (/docs/paid/postal-job)
+
+
+
+# Complete Vehicle System (/docs/paid/vehicle-system)
+
+
+
+# Complete Weapon System (/docs/paid/weapon-system)
+

@@ -1,0 +1,13 @@
+# Using Git (/docs/tips/git)
+
+
+
+Git is a very powerful version control tool that should be used whether you're just making a server or developing resources. Popular implementations include `Github`, `GitLab` and `BitBucket` - the most common you'll run into is `Github` as it is the most popular and in my opinion, the best option in most cases.
+
+To learn how to setup Git, you can reference these materials:
+
+* [Github's Guide to setting up Git](https://docs.github.com/en/get-started/git-basics/set-up-git#setting-up-git)
+* [Git's official website](https://git-scm.com/learn)
+* [Codecademy Git Course](https://www.codecademy.com/learn/learn-git)
+
+There's of course dozens of other ways to learn it, you have access to the entire internet at your finger tips, go do some research!

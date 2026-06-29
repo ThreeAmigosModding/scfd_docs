@@ -1,0 +1,2 @@
+# Airdrops (/docs/paid/airdrops)
+
